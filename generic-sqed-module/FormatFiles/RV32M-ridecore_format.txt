@@ -1,0 +1,191 @@
+# You can use python style comments with (#)
+# to add notes, or comment out lines.
+
+SECTIONS = ISA QEDCONSTRAINTS REGISTERS BITFIELDS INSTYPES INSFIELDS INSREQS R I LW SW NOP
+
+_ISA
+num_registers = 32
+
+_QEDCONSTRAINTS
+half_registers = 1
+
+_REGISTERS
+rd
+rs1
+rs2
+
+_BITFIELDS
+funct7 = 31 25
+funct3 = 14 12
+rd = 11 7
+rs1 = 19 15
+rs2 = 24 20
+opcode = 6 0
+shamt = 24 20
+imm12 = 31 20
+imm7 = 31 25
+imm5 = 11 7
+
+_INSTYPES
+R
+I
+LW
+SW
+NOP
+
+_INSFIELDS
+R = funct7 rs2 rs1 funct3 rd opcode
+I = imm12 rs1 funct3 rd opcode
+LW = imm12 rs1 funct3 rd opcode
+SW = imm7 rs2 rs1 funct3 imm5 opcode
+NOP = imm12 rs1 funct3 rd opcode
+
+_INSREQS
+R
+opcode = 0110011
+
+I
+opcode = 0010011
+
+LW
+opcode = 0000011
+funct3 = 010
+
+SW
+opcode = 0100011
+funct3 = 010
+
+_R
+ADD
+funct3 = 000
+funct7 = 0000000
+opcode = 0110011
+
+SUB
+funct3 = 000
+funct7 = 0100000
+opcode = 0110011
+
+SLL
+funct3 = 001
+funct7 = 0000000
+opcode = 0110011
+
+SLT
+funct3 = 010
+funct7 = 0000000
+opcode = 0110011
+
+SLTU
+funct3 = 011
+funct7 = 0000000
+opcode = 0110011
+
+XOR
+funct3 = 100
+funct7 = 0000000
+opcode = 0110011
+
+SRL
+funct3 = 101
+funct7 = 0000000
+opcode = 0110011
+
+SRA
+funct3 = 101
+funct7 = 0100000
+opcode = 0110011
+
+OR
+funct3 = 110
+funct7 = 0000000
+opcode = 0110011
+
+AND
+funct3 = 111
+funct7 = 0000000
+opcode = 0110011
+
+MUL
+funct3 = 000
+funct7 = 0000001
+opcode = 0110011
+
+MULH
+funct3 = 001
+funct7 = 0000001
+opcode = 0110011
+
+MULHSU
+funct3 = 010
+funct7 = 0000001
+opcode = 0110011
+
+MULHU
+funct3 = 011
+funct7 = 0000001
+opcode = 0110011
+
+_I
+ADDI
+funct3 = 000
+opcode = 0010011
+
+SLTI
+funct3 = 010
+opcode = 0010011
+
+SLTIU
+funct3 = 011
+opcode = 0010011
+
+XORI
+funct3 = 100
+opcode = 0010011
+
+ORI
+funct3 = 110
+opcode = 0010011
+
+ANDI
+funct3 = 111
+opcode = 0010011
+
+SLLI
+funct3 = 001
+funct7 = 0000000
+opcode = 0010011
+
+SRLI
+funct3 = 101
+funct7 = 0000000
+opcode = 0010011
+
+SRAI
+funct3 = 101
+funct7 = 0100000
+opcode = 0010011
+
+_LW
+CONSTRAINT (instruction[31:30] == 00)
+
+LW
+rs1 = 00000
+opcode = 0000011
+funct3 = 010
+
+_SW
+CONSTRAINT (instruction[31:30] == 00)
+
+SW
+rs1 = 00000
+opcode = 0100011
+funct3 = 010
+
+_NOP
+NOP
+opcode = 1111111
+
+
+
+

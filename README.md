@@ -11,3 +11,13 @@ TODO: add appropriate license files for QED generator files, generated files and
   we detect that bug using the generic QED module generated from an
   ISA specification file
 
+- directory "cosa-problem-files": CoSA problem files for running
+  SQED. These files are the same as in the San Diego demo, except for
+  file 'ridecore.vlist' which has been adapted to new paths.
+
+- directory "generic-sqed-module": contains a workflow to generate the
+  Verilog sources of a QED module for ridecore. The workflow is
+  implemented in Python, and for convenience the related files were copied
+  from the official (private) repository at
+  https://github.com/upscale-project/generic-sqed-module
+
