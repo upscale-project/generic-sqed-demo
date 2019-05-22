@@ -1,0 +1,21 @@
+[GENERAL]
+model_files: ridecore.vlist[top],reset_procedure.ets
+clock_behaviors: DetClock(clk, 1)
+vcd: True
+no_arrays: True
+default_initial_value: 0
+
+[DEFAULT]
+bmc_length: 24
+solver_name: btor
+precondition: reset_done
+
+[QED]
+description: "Check for Symbolic QED consistency"
+properties: property.txt
+verification: safety
+assumptions: stable_inst.txt
+# start checking at bound 23
+# the solver still does some inference and simplification at every bound
+bmc_length_min: 23
+
