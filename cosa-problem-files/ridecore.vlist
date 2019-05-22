@@ -39,9 +39,9 @@
 ./ridecore-src-buggy/dualport_ram.v
 ./ridecore-src-buggy/alu.v
 ./ridecore-src-buggy/multiplier.v
-./qed-src/inst_constraint.sv
-./qed-src/modify_instruction.v
-./qed-src/qed_decoder.v
-./qed-src/qed_i_cache.v
-./qed-src/qed_instruction_mux.v
-./qed-src/qed.v
+./generic-sqed-module/QEDFiles/inst_constraints.v
+./generic-sqed-module/QEDFiles/modify_instruction.v
+./generic-sqed-module/QEDFiles/qed_decoder.v
+./generic-sqed-module/QEDFiles/qed_i_cache.v
+./generic-sqed-module/QEDFiles/qed_instruction_mux.v
+./generic-sqed-module/QEDFiles/qed.v
