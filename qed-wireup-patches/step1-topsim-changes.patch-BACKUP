@@ -1,0 +1,41 @@
+*** ridecore-src-buggy/topsim.v	2019-05-22 16:12:22.826727402 -0700
+--- /home/florian/git/github/ride-core-demo/ride-src/topsim.v	2019-05-22 16:15:34.716694523 -0700
+***************
+*** 10,15 ****
+--- 10,17 ----
+  //   input 	    RXD,
+  //   output reg [7:0] LED
+     input clk,
++ // EDIT: make instruction a top-level input
++    input [`INSN_LEN-1:0] instruction,
+     input reset_x
+     );
+  
+***************
+*** 48,53 ****
+--- 50,61 ----
+     wire [`ADDR_LEN-1:0]   prog_loadaddr = 0;
+     wire 		  prog_dmem_we = 0;
+     wire 		  prog_imem_we = 0;
++ 
++    // EDIT: Use the inst_constraint module to constrain instruction to be
++    //       a valid instruction from the ISA
++    inst_constraint inst_constraint0(.clk(clk),
++                                     .instruction(instruction));
++    // EDIT END
+  /*   
+     assign utx_we = (dmem_we_core && (dmem_addr_core == 32'h0)) ? 1'b1 : 1'b0;
+     assign finish_we = (dmem_we_core && (dmem_addr_core == 32'h8)) ? 1'b1 : 1'b0;
+***************
+*** 79,86 ****
+--- 87,96 ----
+        .RST_X_O(reset_x)
+        );
+  */
++    // EDIT: wire up the instruction to the new inst1 port
+     pipeline pipe
+       (
++       .inst1(instruction),
+        .clk(clk),
+        .reset(~reset_x | prog_loading),
+        .pc(pc),
