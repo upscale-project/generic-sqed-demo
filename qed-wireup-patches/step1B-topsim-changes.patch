@@ -1,0 +1,15 @@
+***************
+*** 50,55 ****
+--- 50,61 ----
+     wire [`ADDR_LEN-1:0]   prog_loadaddr = 0;
+     wire 		  prog_dmem_we = 0;
+     wire 		  prog_imem_we = 0;
++ 
++    // EDIT: Use the inst_constraint module to constrain instruction to be
++    //       a valid instruction from the ISA
++    inst_constraint inst_constraint0(.clk(clk),
++                                     .instruction(instruction));
++    // EDIT END
+  /*   
+     assign utx_we = (dmem_we_core && (dmem_addr_core == 32'h0)) ? 1'b1 : 1'b0;
+     assign finish_we = (dmem_we_core && (dmem_addr_core == 32'h8)) ? 1'b1 : 1'b0;
