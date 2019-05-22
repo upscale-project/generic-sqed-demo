@@ -1,0 +1,46 @@
+*** ridecore-src-buggy/topsim.v	2019-05-22 11:44:10.975859599 -0700
+--- /home/florian/git/github/ride-core-demo/ride-src/topsim.v	2019-05-22 15:56:35.631929293 -0700
+***************
+*** 17,32 ****
+  //   wire 	    clk;
+  //   wire 	    reset_x;
+  
+! 
+     wire [`ADDR_LEN-1:0] pc;
+     wire [4*`INSN_LEN-1:0] idata;
+     wire [8:0] 		  imem_addr;
+     wire [`DATA_LEN-1:0]   dmem_data;
+     wire [`DATA_LEN-1:0]   dmem_wdata;
+     wire [`ADDR_LEN-1:0]   dmem_addr;
+     wire 		  dmem_we;
+     wire [`DATA_LEN-1:0]   dmem_wdata_core;
+     wire [`ADDR_LEN-1:0]   dmem_addr_core;
+     wire 		  dmem_we_core;
+  
+     wire 		  utx_we;
+--- 17,41 ----
+  //   wire 	    clk;
+  //   wire 	    reset_x;
+  
+!    (* keep *)
+     wire [`ADDR_LEN-1:0] pc;
++    (* keep *)
+     wire [4*`INSN_LEN-1:0] idata;
++    (* keep *)
+     wire [8:0] 		  imem_addr;
++    (* keep *)
+     wire [`DATA_LEN-1:0]   dmem_data;
++    (* keep *)
+     wire [`DATA_LEN-1:0]   dmem_wdata;
++    (* keep *)
+     wire [`ADDR_LEN-1:0]   dmem_addr;
++    (* keep *)
+     wire 		  dmem_we;
++    (* keep *)
+     wire [`DATA_LEN-1:0]   dmem_wdata_core;
++    (* keep *)
+     wire [`ADDR_LEN-1:0]   dmem_addr_core;
++    (* keep *)
+     wire 		  dmem_we_core;
+  
+     wire 		  utx_we;
