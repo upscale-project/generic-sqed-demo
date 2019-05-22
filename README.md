@@ -21,3 +21,10 @@ TODO: add appropriate license files for QED generator files, generated files and
   from the official (private) repository at
   https://github.com/upscale-project/generic-sqed-module
 
+- TO BE REMOVED--- directory "generic-sqed-module/QEDFiles-bug-fix/":
+  contains QED source files that were updated to fix a spurious
+  counterexample when checking ridecore. This directory will be
+  removed once the bug has been fixed upstream in the original
+  repository of the generic QED module workflow. The workflow will
+  then generate the fixed source files rightaway.
+
