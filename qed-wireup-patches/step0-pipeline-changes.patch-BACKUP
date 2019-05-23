@@ -1,0 +1,179 @@
+*** ridecore-src-buggy/pipeline.v	2019-05-22 11:44:10.971859570 -0700
+--- /tmp/pipeline.v-FINAL-WITHOUT_OPTIMIZATION	2019-05-22 17:02:04.802744817 -0700
+***************
+*** 6,11 ****
+--- 6,12 ----
+  
+  module pipeline
+    (
++    input wire [`INSN_LEN-1:0] inst1,
+     input wire 			clk,
+     input wire 			reset,
+     output reg [`ADDR_LEN-1:0] 	pc,
+***************
+*** 27,33 ****
+     // Signal from pipe_if
+     wire     	       prcond;
+     wire [`ADDR_LEN-1:0] npc;
+!    wire [`INSN_LEN-1:0] inst1;
+     wire [`INSN_LEN-1:0] inst2;
+     wire 		invalid2_pipe;
+     wire [`GSH_BHR_LEN-1:0] bhr;
+--- 28,35 ----
+     // Signal from pipe_if
+     wire     	       prcond;
+     wire [`ADDR_LEN-1:0] npc;
+!    // EDIT: Make inst1 an input
+!    // wire [`INSN_LEN-1:0] inst1;
+     wire [`INSN_LEN-1:0] inst2;
+     wire 		invalid2_pipe;
+     wire [`GSH_BHR_LEN-1:0] bhr;
+***************
+*** 43,48 ****
+--- 45,70 ----
+     reg 			   bhr_if;
+     wire 		   attachable;
+  
++    // EDIT- add in the QED module.
++ 
++    wire 		           qed_vld_out;
++    (* keep *)
++    wire 		           qed_exec_dup;
++    wire [31:0] 		   qed_ifu_instruction;
++ 
++    // instruction1 and qed_exec_dup are cutpoints
++    qed qed0 ( // Inputs
++       .clk(clk),
++             .rst(reset),
++             .ena(1'b1),
++             .ifu_qed_instruction(inst1),
++             .exec_dup(qed_exec_dup),
++             .stall_IF(stall_IF),
++       // outputs
++             .qed_ifu_instruction(qed_ifu_instruction),
++             .vld_out(qed_vld_out));
++ 
++    // EDIT
+     //ID
+     //Decode Info1
+     wire [`IMM_TYPE_WIDTH-1:0] imm_type_1;
+***************
+*** 490,503 ****
+        end
+     end
+  
+!    
+     pipeline_if pipe_if(
+  		       .clk(clk),
+  		       .reset(reset),
+  		       .pc(pc),
+  		       .predict_cond(prcond),
+  		       .npc(npc),
+! 		       .inst1(inst1),
+  		       .inst2(inst2),
+  		       .invalid2(invalid2_pipe),
+  		       .btbpht_we(combranch),
+--- 512,528 ----
+        end
+     end
+  
+!    // EDIT: manually cut inst1, want to drive this from the top-level
+!    //       we don't need to include the instruction fetch
+!    wire [`INSN_LEN-1:0] cut_inst1;
+! 
+     pipeline_if pipe_if(
+  		       .clk(clk),
+  		       .reset(reset),
+  		       .pc(pc),
+  		       .predict_cond(prcond),
+  		       .npc(npc),
+! 		       .inst1(cut_inst1),
+  		       .inst2(inst2),
+  		       .invalid2(invalid2_pipe),
+  		       .btbpht_we(combranch),
+***************
+*** 529,538 ****
+  	 prcond_if <= prcond;
+  	 npc_if <= npc;
+  	 pc_if <= pc;
+! 	 inst1_if <= inst1;
+  	 inst2_if <= inst2;
+! 	 inv1_if <= 0;
+  	 inv2_if <= invalid2_pipe;
+  	 bhr_if <= bhr;
+  	 
+        end
+--- 554,567 ----
+  	 prcond_if <= prcond;
+  	 npc_if <= npc;
+  	 pc_if <= pc;
+! 	 // EDIT: send the output of the QED module through the pipeline.
+! 	 //inst1_if <= inst1;
+! 	 inst1_if <= qed_ifu_instruction;
+  	 inst2_if <= inst2;
+! 	 //inv1_if <= 0;
+! 	 inv1_if <= ~qed_vld_out;   // change to vld_out of qed0
+  	 inv2_if <= invalid2_pipe;
++ 	 // EDIT END
+  	 bhr_if <= bhr;
+  	 
+        end
+***************
+*** 1925,1931 ****
+  		  .rrf_freenum(freenum),
+  		  .prmiss(prmiss)
+  		  );
+!    
+  endmodule // pipeline
+  
+  `default_nettype wire
+--- 1954,2002 ----
+  		  .rrf_freenum(freenum),
+  		  .prmiss(prmiss)
+  		  );
+! 
+!    // EDIT: Insert the qed ready logic -- tracks number of committed instructions
+!    (* keep *)
+!    wire qed_ready;
+!    (* keep *)
+!    reg [15:0] num_orig_insts;
+!    (* keep *)
+!    reg [15:0] num_dup_insts;
+!    wire [1:0] num_orig_commits;
+!    wire [1:0] num_dup_commits;
+! 
+!    // Instruction with destination register as 5'b0 is a NOP so ignore those
+!    assign num_orig_commits = ((arfwe1 == 1)&&(dstarf1 < 16)&&(dstarf1 != 5'b0)
+! 			      &&(arfwe2 == 1)&&(dstarf2 < 16)&&(dstarf2 != 5'b0)) ? 2'b10 :
+! 			     ((((arfwe1 == 1)&&(dstarf1 < 16)&&(dstarf1 != 5'b0)
+! 			       &&((arfwe2 != 1)||(dstarf2 >= 16)||(dstarf2 == 5'b0)))
+! 			      ||((arfwe2 == 1)&&(dstarf2 < 16)&&(dstarf2 != 5'b0)
+! 				 &&((arfwe1 != 1)||(dstarf1 >= 16)||(dstarf1 == 5'b0)))) ? 2'b01 : 2'b00) ;
+! 
+! 
+!    // When destination register is 5'b0, it remains the same for both original and duplicate
+!    assign num_dup_commits = ((arfwe1 == 1)&&(dstarf1 >= 16)
+! 			      &&(arfwe2 == 1)&&(dstarf2 >= 16)) ? 2'b10 :
+! 			     ((((arfwe1 == 1)&&(dstarf1 >= 16)
+! 			       &&((arfwe2 != 1)||(dstarf2 < 16)))
+! 			      ||((arfwe2 == 1)&&(dstarf2 >= 16)
+! 				 &&((arfwe1 != 1)||(dstarf1 < 16)))) ? 2'b01 : 2'b00) ;
+! 
+!    always @(posedge clk)
+!      begin
+! 	if (reset) begin
+! 	   num_orig_insts <= 16'b0;
+! 	   num_dup_insts <= 16'b0;
+! 	end else begin
+! 	   num_orig_insts <= num_orig_insts + {14'b0,num_orig_commits};
+! 	   num_dup_insts <= num_dup_insts + {14'b0,num_dup_commits};
+! 	end
+!      end
+! 
+!    assign qed_ready = (num_orig_insts == num_dup_insts);
+! 
+!    // EDIT END
+! 
+  endmodule // pipeline
+  
+  `default_nettype wire
