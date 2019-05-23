@@ -1,0 +1,17 @@
+***************
+*** 10,16 ****
+     output reg [`DATA_LEN-1:0] rdata
+     );
+  
+!    reg [`DATA_LEN-1:0] 	      mem [0:2047];
+     
+     always @ (posedge clk) begin
+        rdata <= mem[addr[10:0]];
+--- 10,16 ----
+     output reg [`DATA_LEN-1:0] rdata
+     );
+  
+!    reg [`DATA_LEN-1:0] 	      mem [0:31];
+     
+     always @ (posedge clk) begin
+        rdata <= mem[addr[10:0]];
