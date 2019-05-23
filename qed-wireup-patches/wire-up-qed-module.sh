@@ -20,3 +20,17 @@ patch -i ./step2-topsim-changes.patch ../ridecore-src-buggy/topsim.v
 # QED module through the pipeline
 patch -i ./step0-pipeline-changes.patch ../ridecore-src-buggy/pipeline.v
 
+# OPTIONAL: make additional modifications to speed up model checking
+
+# Disable branch prediction
+
+patch -i ./step0-pipeline_if-changes-optimization.patch ../ridecore-src-buggy/pipeline_if.v
+
+# Reduce size of memory
+
+patch -i ./step0-dmem-changes-optimization.patch ../ridecore-src-buggy/dmem.v
+
+# Limit instruction fetch to only one instruction
+
+patch -i ./step1-pipeline-changes-optimization.patch ../ridecore-src-buggy/pipeline.v
+
