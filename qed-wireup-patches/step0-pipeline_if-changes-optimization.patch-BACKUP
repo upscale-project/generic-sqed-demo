@@ -1,0 +1,34 @@
+*** ridecore-src-buggy/pipeline_if.v	2019-05-22 11:44:10.971859570 -0700
+--- /home/florian/git/github/ride-core-demo/ride-src/pipeline_if.v	2019-05-22 15:36:29.917035250 -0700
+***************
+*** 63,75 ****
+  	     .invalid2(invalid2)
+  	     );
+  
+     gshare_predictor gsh
+       (
+        .clk(clk),
+        .reset(reset),
+        .pc(pc),
+        .hit_bht(hit),
+!       .predict_cond(predict_cond),
+        .we(btbpht_we),
+        .wcond(pht_wcond),
+        .went(btbpht_pc[2+:`GSH_BHR_LEN] ^ pht_bhr),
+--- 63,78 ----
+  	     .invalid2(invalid2)
+  	     );
+  
++    // EDIT: manually cut predict_cond and assign it to 0
++    assign predict_cond = 1'b0;
++    wire                     cut_predict_cond;
+     gshare_predictor gsh
+       (
+        .clk(clk),
+        .reset(reset),
+        .pc(pc),
+        .hit_bht(hit),
+!       .predict_cond(cut_predict_cond),
+        .we(btbpht_we),
+        .wcond(pht_wcond),
+        .went(btbpht_pc[2+:`GSH_BHR_LEN] ^ pht_bhr),
