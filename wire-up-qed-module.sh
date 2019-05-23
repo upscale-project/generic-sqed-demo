@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd ./qed-wireup-patches
+
 # Update the topsim module to wire up the QED module
 
 # Add "(* keep *)" pragmas to preserve certain wires for model checking 
@@ -34,3 +36,4 @@ patch -i ./step0-dmem-changes-optimization.patch ../ridecore-src-buggy/dmem.v
 
 patch -i ./step1-pipeline-changes-optimization.patch ../ridecore-src-buggy/pipeline.v
 
+cd ..
