@@ -13,13 +13,15 @@
         .we(btbpht_we),
         .wcond(pht_wcond),
         .went(btbpht_pc[2+:`GSH_BHR_LEN] ^ pht_bhr),
---- 63,78 ----
+--- 63,80 ----
   	     .invalid2(invalid2)
   	     );
   
-+    // EDIT: manually cut predict_cond and assign it to 0
++    // EDIT: manually cut predict_cond and bhr and assign it to 0
 +    assign predict_cond = 1'b0;
++    assign bhr = 1'b0;
 +    wire                     cut_predict_cond;
++    wire                     cut_bhr;
      gshare_predictor gsh
        (
         .clk(clk),
@@ -30,3 +32,20 @@
         .we(btbpht_we),
         .wcond(pht_wcond),
         .went(btbpht_pc[2+:`GSH_BHR_LEN] ^ pht_bhr),
+***************
+*** 77,83 ****
+        .prmiss(prmiss),
+        .prsuccess(prsuccess),
+        .prtag(prtag),
+!       .bhr_master(bhr),
+        .spectagnow(spectagnow)
+        );
+     
+--- 82,88 ----
+        .prmiss(prmiss),
+        .prsuccess(prsuccess),
+        .prtag(prtag),
+!       .bhr_master(cut_bhr),
+        .spectagnow(spectagnow)
+        );
+     

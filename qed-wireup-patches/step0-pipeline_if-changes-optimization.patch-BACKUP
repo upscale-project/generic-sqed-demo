@@ -1,5 +1,5 @@
-*** ridecore-src-buggy/pipeline_if.v	2019-05-22 11:44:10.971859570 -0700
---- /home/florian/git/github/ride-core-demo/ride-src/pipeline_if.v	2019-05-22 15:36:29.917035250 -0700
+*** ridecore-src-buggy/pipeline_if.v	2019-05-23 13:43:30.288051214 -0700
+--- /tmp/pipeline_if.v	2019-05-23 13:43:21.019973883 -0700
 ***************
 *** 63,75 ****
   	     .invalid2(invalid2)
@@ -15,13 +15,15 @@
         .we(btbpht_we),
         .wcond(pht_wcond),
         .went(btbpht_pc[2+:`GSH_BHR_LEN] ^ pht_bhr),
---- 63,78 ----
+--- 63,80 ----
   	     .invalid2(invalid2)
   	     );
   
-+    // EDIT: manually cut predict_cond and assign it to 0
++    // EDIT: manually cut predict_cond and bhr and assign it to 0
 +    assign predict_cond = 1'b0;
++    assign bhr = 1'b0;
 +    wire                     cut_predict_cond;
++    wire                     cut_bhr;
      gshare_predictor gsh
        (
         .clk(clk),
@@ -32,3 +34,20 @@
         .we(btbpht_we),
         .wcond(pht_wcond),
         .went(btbpht_pc[2+:`GSH_BHR_LEN] ^ pht_bhr),
+***************
+*** 77,83 ****
+        .prmiss(prmiss),
+        .prsuccess(prsuccess),
+        .prtag(prtag),
+!       .bhr_master(bhr),
+        .spectagnow(spectagnow)
+        );
+     
+--- 82,88 ----
+        .prmiss(prmiss),
+        .prsuccess(prsuccess),
+        .prtag(prtag),
+!       .bhr_master(cut_bhr),
+        .spectagnow(spectagnow)
+        );
+     
