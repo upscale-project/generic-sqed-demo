@@ -28,3 +28,4 @@ TODO: add appropriate license files for QED generator files, generated files and
   repository of the generic QED module workflow. The workflow will
   then generate the fixed source files rightaway.
 
+TODO: add optional patches to include optimizations to speed up checking
