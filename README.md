@@ -1,8 +1,8 @@
 # Demo: A Generic Approach to Symbolic Quick Error Detection (QED)
 
-This demo is a reimplementation of a (previous related
-demo)[https://github.com/makaimann/ride-core-demo] that shows how a
-bug in the (RIDECORE)[https://github.com/ridecore/ridecore] RISC-V
+This demo is a reimplementation of a [previous related
+demo](https://github.com/makaimann/ride-core-demo) that shows how a
+bug in the [RIDECORE](https://github.com/ridecore/ridecore) RISC-V
 processor core is discovered using symbolic quick error detection
 (QED).
 
@@ -20,13 +20,13 @@ This demo consists of multiple components each of which come with their own lice
 # Dependencies
 
 We assume that the [Yosys Open Synthesis Suite](https://github.com/YosysHQ/yosys), the model checker
-(CoSA)[https://github.com/cristian-mattarei/CoSA] and the SMT solver
-(Boolector)[https://github.com/Boolector/boolector] including its
+[CoSA](https://github.com/cristian-mattarei/CoSA) and the SMT solver
+[Boolector](https://github.com/Boolector/boolector) including its
 Python bindings are installed.
 
 General installation instructions can be found in the
-(README)[https://github.com/makaimann/ride-core-demo/blob/master/install/README.md]
-of the (related demo)[https://github.com/makaimann/ride-core-demo].
+[README](https://github.com/makaimann/ride-core-demo/blob/master/install/README.md)
+of the [related demo](https://github.com/makaimann/ride-core-demo).
 
 # Symbolic Quick Error Detection (QED)
 
