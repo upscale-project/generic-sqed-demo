@@ -1,0 +1,32 @@
+***************
+*** 51,62 ****
+  		       .invalid(invalid2)
+  		       );
+  
+     btb brtbl(
+  	     .clk(clk),
+  	     .reset(reset),
+  	     .pc(pc),
+! 	     .hit(hit),
+! 	     .jmpaddr(pred_pc),
+  	     .we(btbpht_we),
+  	     .jmpsrc(btbpht_pc),
+  	     .jmpdst(btb_jmpdst),
+--- 51,67 ----
+  		       .invalid(invalid2)
+  		       );
+  
++    assign hit = 1'b0;
++    assign pred_pc = 32'd0;
++    wire [`ADDR_LEN-1:0] cut_pred_pc;
++    wire cut_hit;
++ 
+     btb brtbl(
+  	     .clk(clk),
+  	     .reset(reset),
+  	     .pc(pc),
+! 	     .hit(cut_hit),
+! 	     .jmpaddr(cut_pred_pc),
+  	     .we(btbpht_we),
+  	     .jmpsrc(btbpht_pc),
+  	     .jmpdst(btb_jmpdst),
