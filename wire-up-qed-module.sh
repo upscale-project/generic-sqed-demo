@@ -36,8 +36,9 @@ patch -i ./step0-dmem-changes-optimization.patch ../ridecore-src-buggy/dmem.v
 
 patch -i ./step1-pipeline-changes-optimization.patch ../ridecore-src-buggy/pipeline.v
 
-# Branch prediction: another optimization
-# DISABLED---turns out to be slower
-#patch -i ./step1-pipeline_if-changes-optimization.patch ../ridecore-src-buggy/pipeline_if.v
+# Remove branch target buffer to get rid of neg-edge behavior. This
+# optimization allows to abstract the clock and reduce the number of
+# unrollings in BMC
+patch -i ./step1-pipeline_if-changes-optimization.patch ../ridecore-src-buggy/pipeline_if.v
 
 cd ..

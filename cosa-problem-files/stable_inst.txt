@@ -1,2 +1,0 @@
-# instruction is stable for the clock cycle
-(clk = 0_1) -> (next(instruction) = instruction)

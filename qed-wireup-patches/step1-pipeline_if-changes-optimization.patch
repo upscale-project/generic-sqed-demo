@@ -1,32 +1,28 @@
 ***************
-*** 51,62 ****
+*** 51,56 ****
+--- 51,57 ----
   		       .invalid(invalid2)
   		       );
   
++    /* EDIT: remove branch target buffer to get rid of neg-edge behavior
      btb brtbl(
   	     .clk(clk),
   	     .reset(reset),
-  	     .pc(pc),
-! 	     .hit(hit),
-! 	     .jmpaddr(pred_pc),
-  	     .we(btbpht_we),
-  	     .jmpsrc(btbpht_pc),
+***************
+*** 62,68 ****
   	     .jmpdst(btb_jmpdst),
---- 51,67 ----
-  		       .invalid(invalid2)
-  		       );
-  
-+    assign hit = 1'b0;
-+    assign pred_pc = 32'd0;
-+    wire [`ADDR_LEN-1:0] cut_pred_pc;
-+    wire cut_hit;
-+ 
-     btb brtbl(
-  	     .clk(clk),
-  	     .reset(reset),
-  	     .pc(pc),
-! 	     .hit(cut_hit),
-! 	     .jmpaddr(cut_pred_pc),
-  	     .we(btbpht_we),
-  	     .jmpsrc(btbpht_pc),
+  	     .invalid2(invalid2)
+  	     );
+! 
+     // EDIT: manually cut predict_cond and bhr and assign it to 0
+     assign predict_cond = 1'b0;
+     assign bhr = 1'b0;
+--- 63,70 ----
   	     .jmpdst(btb_jmpdst),
+  	     .invalid2(invalid2)
+  	     );
+!     */
+!     
+     // EDIT: manually cut predict_cond and bhr and assign it to 0
+     assign predict_cond = 1'b0;
+     assign bhr = 1'b0;
