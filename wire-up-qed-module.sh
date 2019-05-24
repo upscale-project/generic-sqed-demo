@@ -37,7 +37,7 @@ patch -i ./step0-dmem-changes-optimization.patch ../ridecore-src-buggy/dmem.v
 patch -i ./step1-pipeline-changes-optimization.patch ../ridecore-src-buggy/pipeline.v
 
 # Branch prediction: another optimization
-
-patch -i ./step1-pipeline_if-changes-optimization.patch ../ridecore-src-buggy/pipeline_if.v
+# DISABLED---turns out to be slower
+#patch -i ./step1-pipeline_if-changes-optimization.patch ../ridecore-src-buggy/pipeline_if.v
 
 cd ..
