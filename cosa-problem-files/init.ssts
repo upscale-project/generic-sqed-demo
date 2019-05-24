@@ -1,0 +1,24 @@
+INPUT
+
+OUTPUT
+
+STATE
+state_counter : BV(10) ;
+
+INIT
+state_counter = 0_10 ;
+prog_loading = 1_1 ;
+pipe.inv1_id = 1_1 ;
+pipe.inv1_if = 1_1 ;
+pipe.inv2_id = 1_1 ;
+pipe.inv2_if = 1_1 ;
+pipe.reserv_alu1.sortbit = 1_8 ;
+pipe.reserv_alu2.sortbit = 1_8 ;
+pipe.rrf_fl.freenum = 64_7 ;
+pipe.taggen.tagreg = 1_5 ;
+
+INVAR
+reset_x = 1_1;
+
+TRANS
+next(state_counter) = ((state_counter < 31_10) ? state_counter + 1_10 : 0_10) ;
