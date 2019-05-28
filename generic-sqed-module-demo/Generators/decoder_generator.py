@@ -23,7 +23,7 @@ for ins in format_dicts["INSTYPES"].keys():
         instructions[ins] = format_dicts[ins]
 
 MODULENAME = "qed_decoder"
-INPUTS = {"ifu_qed_instruction": int(isa_info["num_registers"])}
+INPUTS = {"ifu_qed_instruction": int(isa_info["instruction_length"])}
 OUTPUTS = {}
 
 # Fill out the OUTPUTS dict

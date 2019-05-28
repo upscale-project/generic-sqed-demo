@@ -33,9 +33,9 @@ for ins in format_dicts["INSTYPES"].keys():
 
 # Global header for module
 MODULENAME = "qed"
-INPUTS = {"clk": 1, "ifu_qed_instruction": int(isa_info["num_registers"]),
+INPUTS = {"clk": 1, "ifu_qed_instruction": int(isa_info["instruction_length"]),
         "rst": 1, "ena": 1, "exec_dup": 1, "stall_IF": 1}
-OUTPUTS = {"qed_ifu_instruction": int(isa_info["num_registers"]), "vld_out": 1}
+OUTPUTS = {"qed_ifu_instruction": int(isa_info["instruction_length"]), "vld_out": 1}
 
 # Adds module header definition
 verilog += I.module_header(MODULENAME, INPUTS, OUTPUTS)
@@ -69,9 +69,9 @@ for ins_type in ins_reqs:
 
 # Instantiate internal instruction versions
 verilog += I.newline(1)
-verilog += I.signal_def(int(isa_info["num_registers"]), "wire", "qed_instruction", num_spaces=2)
+verilog += I.signal_def(int(isa_info["instruction_length"]), "wire", "qed_instruction", num_spaces=2)
 verilog += I.newline(1)
-verilog += I.signal_def(int(isa_info["num_registers"]), "wire", "qic_qimux_instruction", num_spaces=2)
+verilog += I.signal_def(int(isa_info["instruction_length"]), "wire", "qic_qimux_instruction", num_spaces=2)
 verilog += I.newline(2)
 
 # Decoder module

@@ -29,8 +29,8 @@ for ins in format_dicts["INSTYPES"].keys():
         instructions[ins] = format_dicts[ins]
 
 MODULENAME = "modify_instruction"
-INPUTS = {"qic_qimux_instruction": int(isa_info["num_registers"])}
-OUTPUTS = {"qed_instruction": int(isa_info["num_registers"])}
+INPUTS = {"qic_qimux_instruction": int(isa_info["instruction_length"])}
+OUTPUTS = {"qed_instruction": int(isa_info["instruction_length"])}
 
 # Fill out the INPUTS dict
 for bit_field in bit_fields:
@@ -60,7 +60,7 @@ for out in OUTPUTS:
 # Instantiate new instruction types wires
 verilog += I.newline(1)
 for ins_type in ins_reqs:
-    verilog += I.signal_def(int(isa_info["num_registers"]), "wire", "INS_"+ins_type, num_spaces=2)
+    verilog += I.signal_def(int(isa_info["instruction_length"]), "wire", "INS_"+ins_type, num_spaces=2)
     verilog += I.newline(1)
 
 # Instantiate the new registers and immediate values

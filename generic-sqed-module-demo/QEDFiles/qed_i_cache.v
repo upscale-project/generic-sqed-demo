@@ -1,12 +1,10 @@
-`include "qed.vh"
-
 module qed_i_cache (/*AUTOARG*/
    // Outputs
    qic_qimux_instruction,
    vld_out,  // whenever nop is executed vld_out is 1'b0
    // Inputs
    clk, rst,
-   exec_dup, IF_stall,		    
+   exec_dup, IF_stall,
    //vld_inst, mode
    ifu_qed_instruction
    );
@@ -16,7 +14,7 @@ module qed_i_cache (/*AUTOARG*/
 
    input         clk;
    input         rst;
-   
+
    // input         vld_inst;
    // input [2:0]   mode;
    input 	 exec_dup;
@@ -32,7 +30,7 @@ module qed_i_cache (/*AUTOARG*/
    reg [6:0] 	 address_head;
    wire 	 is_empty;
    wire 	 is_full;
-   
+
 //   wire [6:0] 	 nxt_address_base;
    wire [31:0]   instruction;
    wire 	 is_nop;
@@ -46,10 +44,10 @@ module qed_i_cache (/*AUTOARG*/
    assign is_nop = (ifu_qed_instruction[6:0] == 7'b1111111);
    assign is_empty = (address_tail == address_head);
    assign is_full = ((address_tail + 1) == address_head);
-   
+
 
    assign vld_out = (~insert_cond)&(~delete_cond) ? 1'b0 : 1'b1 ;
-   
+
 
    // address computation
    always @(posedge clk)
@@ -63,10 +61,10 @@ module qed_i_cache (/*AUTOARG*/
         end else if (delete_cond) begin
 	   address_head <= address_head + 1;
 	end
-     end 
+     end
 
    assign instruction = i_cache[address_head];
-   // always @(posedge clk) 
+   // always @(posedge clk)
    //   begin
    //      if ((mode == `ORIGINAL_MODE) && vld_inst)
    //        begin
@@ -74,18 +72,18 @@ module qed_i_cache (/*AUTOARG*/
    //        end
    //   end // always @ (posedge clk)
 
-   
+
    // assign qic_qimux_instruction = (mode == `ORIGINAL_MODE) ? ifu_qed_instruction :
    //                                (mode == `DUP_MODE) ? instruction :
    //                                32'h0_0100_0000; // NOP
 
    assign qic_qimux_instruction = insert_cond ? ifu_qed_instruction : (delete_cond ? instruction : 32'b1111111);
     // no need to consider rst case as it's implicitly there in insert_cond and delete_cond
-   
-   
+
+
 endmodule // qed_i_cache
 
-     
 
- 
-        
+
+
+

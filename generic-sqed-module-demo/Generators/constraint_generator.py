@@ -28,7 +28,7 @@ for ins in format_dicts["INSTYPES"].keys():
 
 # Global header for module
 MODULENAME = "inst_constraint"
-INPUTS = {"clk": 1, "instruction": int(isa_info["num_registers"])}
+INPUTS = {"clk": 1, "instruction": int(isa_info["instruction_length"])}
 OUTPUTS = {}
 
 # Adds module header definition
@@ -57,7 +57,8 @@ for bit_field in bit_fields:
 # Instantiate instructions
 verilog += I.newline(1)
 for ins_type in instructions:
-    if len(instructions[ins_type]["CONSTRAINT"]) > 0:
+    #if len(instructions[ins_type]["CONSTRAINT"]) > 0:
+    if ins_type != "NOP":
         verilog += I.signal_def(1, "wire", "FORMAT_"+ins_type, num_spaces=2)
         verilog += I.newline(1)
     verilog += I.signal_def(1, "wire", "ALLOWED_"+ins_type, num_spaces=2)
@@ -85,12 +86,12 @@ for ins_type in instructions:
         fields = ins_fields[ins_type].split()
         for field in fields:
             if field in registers:
-                constraints.append(I._lt(field, str(int(isa_info["num_registers"])/2), parens=True))
+                constraints.append(I._lt(field, str(int(isa_info["instruction_length"])/2), parens=True))
 
     for type_constraint in type_constraints:
         constraints.append(type_constraint)
 
-    if len(constraints) > 0:
+    if ins_type != "NOP" and len(constraints) > 0:
         expression = constraints[0]
         for i in range(1, len(constraints)):
             expression = I._and(expression, constraints[i], parens=False)
@@ -108,7 +109,8 @@ for ins_type in instructions:
                     req = fields[field]
                     reqs.append(I._equals(field, I._constant(len(req), req), parens=True))
 
-            if len(instructions[ins_type]["CONSTRAINT"]) > 0:
+            #if len(instructions[ins_type]["CONSTRAINT"]) > 0:
+            if ins != "NOP":
                 reqs_expression = "FORMAT_" + ins_type
                 for i in range(len(reqs)):
                     reqs_expression = I._and(reqs_expression, reqs[i], parens=False)
