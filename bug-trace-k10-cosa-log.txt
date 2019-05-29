@@ -1,212 +1,16 @@
-Parsing file "cosa-problem-files/ridecore.vlist"... 
-Reading source files from "ridecore.vlist"... 
-Command: yosys -p "read_verilog -nomem2reg -sv ./ridecore-src-buggy/topsim.v ./ridecore-src-buggy/alloc_issue_ino.v ./ridecore-src-buggy/search_be.v ./ridecore-src-buggy/srcsel.v ./ridecore-src-buggy/alu_ops.vh ./ridecore-src-buggy/arf.v ./ridecore-src-buggy/ram_sync.v ./ridecore-src-buggy/ram_sync_nolatch.v ./ridecore-src-buggy/brimm_gen.v ./ridecore-src-buggy/constants.vh ./ridecore-src-buggy/decoder.v ./ridecore-src-buggy/dmem.v ./ridecore-src-buggy/exunit_alu.v ./ridecore-src-buggy/exunit_branch.v ./ridecore-src-buggy/exunit_ldst.v ./ridecore-src-buggy/exunit_mul.v ./ridecore-src-buggy/imem.v ./ridecore-src-buggy/imm_gen.v ./ridecore-src-buggy/pipeline_if.v ./ridecore-src-buggy/gshare.v ./ridecore-src-buggy/pipeline.v ./ridecore-src-buggy/oldest_finder.v ./ridecore-src-buggy/btb.v ./ridecore-src-buggy/prioenc.v ./ridecore-src-buggy/mpft.v ./ridecore-src-buggy/reorderbuf.v ./ridecore-src-buggy/rrf_freelistmanager.v ./ridecore-src-buggy/rrf.v ./ridecore-src-buggy/rs_alu.v ./ridecore-src-buggy/rs_branch.v ./ridecore-src-buggy/rs_ldst.v ./ridecore-src-buggy/rs_mul.v ./ridecore-src-buggy/rs_reqgen.v ./ridecore-src-buggy/rv32_opcodes.vh ./ridecore-src-buggy/src_manager.v ./ridecore-src-buggy/srcopr_manager.v ./ridecore-src-buggy/storebuf.v ./ridecore-src-buggy/tag_generator.v ./ridecore-src-buggy/dualport_ram.v ./ridecore-src-buggy/alu.v ./ridecore-src-buggy/multiplier.v ./generic-sqed-module/QEDFiles/inst_constraints.v ./generic-sqed-module/QEDFiles/modify_instruction.v ./generic-sqed-module/QEDFiles/qed_decoder.v ./generic-sqed-module/QEDFiles/qed_i_cache.v ./generic-sqed-module/QEDFiles/qed_instruction_mux.v ./generic-sqed-module/QEDFiles/qed.v; prep -top top; hierarchy -check; memory; flatten;; setundef -undriven -anyseq; write_btor __yosys_verilog__.btor2"
 DONE
-Parsing file "cosa-problem-files/init.ssts"... 
-DONE
-Statistics (System 1):
-  Variables:	10863
-   - BV{1}:	6575
-   - BV{32}:	1815
-   - BV{6}:	628
-   - BV{128}:	519
-   - BV{5}:	367
-   - BV{2}:	350
-   - BV{4}:	163
-   - BV{3}:	142
-   - BV{10}:	96
-   - BV{8}:	86
-   - BV{7}:	42
-   - BV{64}:	26
-   - BV{16}:	24
-   - BV{12}:	11
-   - BV{9}:	4
-   - BV{31}:	3
-   - BV{33}:	2
-   - BV{30}:	2
-   - BV{24}:	2
-   - BV{13}:	2
-   - BV{11}:	2
-   - BV{26}:	1
-   - BV{19}:	1
-   - Total Bits: 142986
-  StateVars:	6593
-   - BV{1}:	5081
-   - BV{128}:	513
-   - BV{32}:	496
-   - BV{2}:	163
-   - BV{5}:	152
-   - BV{4}:	53
-   - BV{3}:	46
-   - BV{6}:	41
-   - BV{8}:	12
-   - BV{7}:	9
-   - BV{10}:	7
-   - BV{64}:	6
-   - BV{31}:	3
-   - BV{16}:	3
-   - BV{13}:	2
-   - BV{11}:	2
-   - BV{9}:	1
-   - BV{26}:	1
-   - BV{19}:	1
-   - BV{12}:	1
-   - Total Bits: 89167
-  Inputs:	3
-   - BV{1}:	2
-   - BV{32}:	1
-   - Total Bits: 34
-  Outputs:	0
-   - Total Bits: 0
-Set 6582/6593 state elements to zero in initial state
-
-Solving with abstract_clock=True, add_clock=False
-
-*** Analyzing problem "QED_0" ***
-Property: ((pipe.num_orig_insts = pipe.num_dup_insts) -> ((((((((((((((('pipe.aregfile.regfile.mem[1]' = 'pipe.aregfile.regfile.mem[17]') & ('pipe.aregfile.regfile.mem[2]' = 'pipe.aregfile.regfile.mem[18]')) & ('pipe.aregfile.regfile.mem[3]' = 'pipe.aregfile.regfile.mem[19]')) & ('pipe.aregfile.regfile.mem[4]' = 'pipe.aregfile.regfile.mem[20]')) & ('pipe.aregfile.regfile.mem[5]' = 'pipe.aregfile.regfile.mem[21]')) & ('pipe.aregfile.regfile.mem[6]' = 'pipe.aregfile.regfile.mem[22]')) & ('pipe.aregfile.regfile.mem[7]' = 'pipe.aregfile.regfile.mem[23]')) & ('pipe.aregfile.regfile.mem[8]' = 'pipe.aregfile.regfile.mem[24]')) & ('pipe.aregfile.regfile.mem[9]' = 'pipe.aregfile.regfile.mem[25]')) & ('pipe.aregfile.regfile.mem[10]' = 'pipe.aregfile.regfile.mem[26]')) & ('pipe.aregfile.regfile.mem[11]' = 'pipe.aregfile.regfile.mem[27]')) & ('pipe.aregfile.regfile.mem[12]' = 'pipe.aregfile.regfile.mem[28]')) & ('pipe.aregfile.regfile.mem[13]' = 'pipe.aregfile.regfile.mem[29]')) & ('pipe.aregfile.regfile.mem[14]' = 'pipe.aregfile.regfile.mem[30]')) & ('pipe.aregfile.regfile.mem[15]' = 'pipe.aregfile.regfile.mem[31]')))
-Add init and invar
-Push solver "inc_fwd"
-Add not property at time 0
-
-Solving for k=0
-Solve solver "inc_fwd"
-Timer "Solve": start
-Timer "Solve": 2.78 sec
-Total time solve: 2.78 sec
-No counterexample found with k=0
-Pop solver "inc_fwd"
-Unroll from 0 to 1
-Add trans, k=0
-Push solver "inc_fwd"
-Add not property at time 1
-
-Solving for k=1
-Solve solver "inc_fwd"
-Timer "Solve": start
-Timer "Solve": 1.31 sec
-Total time solve: 4.09 sec
-No counterexample found with k=1
-Pop solver "inc_fwd"
-Unroll from 1 to 2
-Add trans, k=1
-Push solver "inc_fwd"
-Add not property at time 2
-
-Solving for k=2
-Solve solver "inc_fwd"
-Timer "Solve": start
-Timer "Solve": 1.36 sec
-Total time solve: 5.44 sec
-No counterexample found with k=2
-Pop solver "inc_fwd"
-Unroll from 2 to 3
-Add trans, k=2
-Push solver "inc_fwd"
-Add not property at time 3
-
-Solving for k=3
-Solve solver "inc_fwd"
-Timer "Solve": start
-Timer "Solve": 1.34 sec
-Total time solve: 6.78 sec
-No counterexample found with k=3
-Pop solver "inc_fwd"
-Unroll from 3 to 4
-Add trans, k=3
-Push solver "inc_fwd"
-Add not property at time 4
-
-Solving for k=4
-Solve solver "inc_fwd"
-Timer "Solve": start
-Timer "Solve": 1.44 sec
-Total time solve: 8.23 sec
-No counterexample found with k=4
-Pop solver "inc_fwd"
-Unroll from 4 to 5
-Add trans, k=4
-Push solver "inc_fwd"
-Add not property at time 5
-
-Solving for k=5
-Solve solver "inc_fwd"
-Timer "Solve": start
-Timer "Solve": 1.27 sec
-Total time solve: 9.50 sec
-No counterexample found with k=5
-Pop solver "inc_fwd"
-Unroll from 5 to 6
-Add trans, k=5
-Push solver "inc_fwd"
-Add not property at time 6
-
-Solving for k=6
-Solve solver "inc_fwd"
-Timer "Solve": start
-Timer "Solve": 1.63 sec
-Total time solve: 11.13 sec
-No counterexample found with k=6
-Pop solver "inc_fwd"
-Unroll from 6 to 7
-Add trans, k=6
-Push solver "inc_fwd"
-Add not property at time 7
-
-Solving for k=7
-Solve solver "inc_fwd"
-Timer "Solve": start
-Timer "Solve": 5.48 sec
-Total time solve: 16.61 sec
-No counterexample found with k=7
-Pop solver "inc_fwd"
-Unroll from 7 to 8
-Add trans, k=7
-Push solver "inc_fwd"
-Add not property at time 8
-
-Solving for k=8
-Solve solver "inc_fwd"
-Timer "Solve": start
-Timer "Solve": 23.86 sec
-Total time solve: 40.47 sec
-No counterexample found with k=8
-Pop solver "inc_fwd"
-Unroll from 8 to 9
-Add trans, k=8
-Push solver "inc_fwd"
-Add not property at time 9
-
-Solving for k=9
-Solve solver "inc_fwd"
-Timer "Solve": start
-Timer "Solve": 48.19 sec
-Total time solve: 88.66 sec
-No counterexample found with k=9
-Pop solver "inc_fwd"
-Unroll from 9 to 10
-Add trans, k=9
-Push solver "inc_fwd"
-Add not property at time 10
-
-Solving for k=10
-Solve solver "inc_fwd"
-Timer "Solve": start
-Timer "Solve": 55.93 sec
-Total time solve: 144.58 sec
-Counterexample found with k=10
-
-*** Problem "QED_0" is FALSE ***
+Parsing file "cosa-problem-files/init.ssts"... DONE
+ FALSE
 
 *** SUMMARY ***
 
 ** Problem QED_0 **
 Description: "Check for Symbolic QED consistency"
-Formula: ((pipe.num_orig_insts = pipe.num_dup_insts)) -> (('pipe.aregfile.regfile.mem[1]' = 'pipe.aregfile.regfile.mem[17]') & ('pipe.aregfile.regfile.mem[2]' = 'pipe.aregfile.regfile.mem[18]') & ('pipe.aregfile.regfile.mem[3]' = 'pipe.aregfile.regfile.mem[19]') & ('pipe.aregfile.regfile.mem[4]' = 'pipe.aregfile.regfile.mem[20]') & ('pipe.aregfile.regfile.mem[5]' = 'pipe.aregfile.regfile.mem[21]') & ('pipe.aregfile.regfile.mem[6]' = 'pipe.aregfile.regfile.mem[22]') & ('pipe.aregfile.regfile.mem[7]' = 'pipe.aregfile.regfile.mem[23]') & ('pipe.aregfile.regfile.mem[8]' = 'pipe.aregfile.regfile.mem[24]') & ('pipe.aregfile.regfile.mem[9]' = 'pipe.aregfile.regfile.mem[25]') & ('pipe.aregfile.regfile.mem[10]' = 'pipe.aregfile.regfile.mem[26]') & ('pipe.aregfile.regfile.mem[11]' = 'pipe.aregfile.regfile.mem[27]') & ('pipe.aregfile.regfile.mem[12]' = 'pipe.aregfile.regfile.mem[28]') & ('pipe.aregfile.regfile.mem[13]' = 'pipe.aregfile.regfile.mem[29]') & ('pipe.aregfile.regfile.mem[14]' = 'pipe.aregfile.regfile.mem[30]') & ('pipe.aregfile.regfile.mem[15]' = 'pipe.aregfile.regfile.mem[31]'))
 Result: FALSE
 Counterexample:
 ---> INIT <---
-  I: clk = 0_1
-  I: instruction = 33816703_32
+  I: clk = 1_1
+  I: instruction = 15759359_32
   I: reset_x = 1_1
   I: pipe.num_dup_insts = 0_16
   I: pipe.num_orig_insts = 0_16
@@ -242,42 +46,42 @@ Counterexample:
   I: pipe.aregfile.regfile.mem[9] = 0_32
 
 ---> STATE 1 <---
-  S1: instruction = 3297772307_32
+  S1: instruction = 3719316115_32
 
 ---> STATE 2 <---
-  S2: instruction = 42993587_32
+  S2: instruction = 48414739_32
 
 ---> STATE 3 <---
-  S3: instruction = 40055731_32
+  S3: instruction = 38973619_32
 
 ---> STATE 4 <---
-  S4: instruction = 33564671_32
+  S4: instruction = 41984051_32
 
 ---> STATE 5 <---
-  S5: instruction = 33562659_32
+  S5: instruction = 13639715_32
 
 ---> STATE 6 <---
-  S6: instruction = 2197824531_32
+  S6: instruction = 44927_32
 
 ---> STATE 7 <---
-  S7: instruction = 536881443_32
+  S7: instruction = 2147488895_32
   S7: pipe.num_orig_insts = 1_16
-  S7: pipe.aregfile.regfile.mem[6] = 4294966345_32
+  S7: pipe.aregfile.regfile.mem[5] = 4294966747_32
 
 ---> STATE 8 <---
-  S8: instruction = 127_32
+  S8: instruction = 15728767_32
   S8: pipe.num_dup_insts = 1_16
-  S8: pipe.aregfile.regfile.mem[22] = 4294966345_32
+  S8: pipe.aregfile.regfile.mem[21] = 4294966747_32
 
 ---> STATE 9 <---
-  S9: instruction = 552630271_32
+  S9: instruction = 16226227_32
   S9: pipe.num_orig_insts = 2_16
-  S9: pipe.aregfile.regfile.mem[7] = 4294965394_32
+  S9: pipe.aregfile.regfile.mem[1] = 4294966198_32
 
 ---> STATE 10 <---
-  S10: instruction = 33816703_32
+  S10: instruction = 4294967288_32
   S10: pipe.num_dup_insts = 2_16
-  S10: pipe.aregfile.regfile.mem[23] = 904401_32
+  S10: pipe.aregfile.regfile.mem[17] = 301401_32
 Counterexamples: [3], [4]
 Traces (max) length: 11
 
