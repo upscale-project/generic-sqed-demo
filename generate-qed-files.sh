@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ./generic-sqed-module/Generators/
+cd ./generic-sqed-module-demo/Generators/
 
 python constraint_generator.py
 python decoder_generator.py
