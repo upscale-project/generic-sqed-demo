@@ -111,7 +111,8 @@ for ins_type in ins_reqs:
         fields = ins_fields[ins_type].split()
         new_fields = []
         for field in fields:
-            if field in modified_fields:
+            # temporary
+            if field in modified_fields and not(ins_type == "I" and field == "imm12"):
                 new_fields.append("NEW_"+field)
             else:
                 new_fields.append(field)

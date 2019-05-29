@@ -54,7 +54,7 @@ imm7);
   assign NEW_imm12 = {2'b01, imm12[9:0]};
   assign NEW_imm7 = {2'b01, imm7[4:0]};
 
-  assign INS_I = {NEW_imm12, NEW_rs1, funct3, NEW_rd, opcode};
+  assign INS_I = {imm12, NEW_rs1, funct3, NEW_rd, opcode};
   assign INS_LW = {NEW_imm12, NEW_rs1, funct3, NEW_rd, opcode};
   assign INS_R = {funct7, NEW_rs2, NEW_rs1, funct3, NEW_rd, opcode};
   assign INS_SW = {NEW_imm7, NEW_rs2, NEW_rs1, funct3, imm5, opcode};
