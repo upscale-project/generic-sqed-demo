@@ -1,3 +1,8 @@
+// Copyright (c) Stanford University
+//
+// This source code is patent protected and being made available under the
+// terms explained in the ../LICENSE-Academic and ../LICENSE-GOV files.
+
 module qed_i_cache (/*AUTOARG*/
    // Outputs
    qic_qimux_instruction,
