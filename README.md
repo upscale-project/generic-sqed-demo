@@ -15,7 +15,7 @@ that is integrated in the RIDECORE design for testing purposes.
 This demo consists of multiple components each of which come with their own license. Please view the license files in the sub-directories. For convenience, they have been linked here: 
 * Model checker and its configuration files -- ./cosa-problem-files/: [BSD LICENSE](./cosa-problem-files/LICENSE)
 * RIDECORE source files -- ./ridecore-src-buggy/: [Tokyo Institute of Technology and Regents of the University of California LICENSE](./ridecore-src-buggy/LICENSE)
-* QED module -- ./generic-sqed-module/: [Academic](./generic-sqed-module/LICENSE-Academic) and [Government Use Only](./generic-sqed-module/LICENSE-GOV)
+* QED module -- ./generic-sqed-module/: [Academic](./generic-sqed-module-demo/LICENSE-Academic) and [Government Use Only](./generic-sqed-module-demo/LICENSE-GOV)
 
 # Dependencies
 
