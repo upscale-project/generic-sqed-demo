@@ -1,14 +1,14 @@
 [*]
 [*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
-[*] Thu May 30 18:34:56 2019
+[*] Sat Jun  1 17:07:29 2019
 [*]
 [dumpfile] "/home/florian/git/github/generic-sqed-demo/bug-trace-k10.vcd"
-[dumpfile_mtime] "Wed May 29 18:49:51 2019"
+[dumpfile_mtime] "Wed May 29 19:47:10 2019"
 [dumpfile_size] 3487407
 [savefile] "/home/florian/git/github/generic-sqed-demo/bug-trace-gtkwave.gtkw"
-[timestart] 1
-[size] 2560 1385
-[pos] -29 -29
+[timestart] 5
+[size] 1920 1025
+[pos] -1 -1
 *0.111031 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] pipe.
 [treeopen] pipe.aregfile.
