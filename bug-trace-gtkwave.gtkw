@@ -1,12 +1,12 @@
 [*]
 [*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
-[*] Sat Jun  1 17:07:29 2019
+[*] Tue Jun 18 07:23:00 2019
 [*]
 [dumpfile] "/home/florian/git/github/generic-sqed-demo/bug-trace-k10.vcd"
 [dumpfile_mtime] "Wed May 29 19:47:10 2019"
 [dumpfile_size] 3487407
 [savefile] "/home/florian/git/github/generic-sqed-demo/bug-trace-gtkwave.gtkw"
-[timestart] 5
+[timestart] 0
 [size] 1920 1025
 [pos] -1 -1
 *0.111031 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
@@ -21,16 +21,19 @@ pipe.clk[0]
 @22
 pipe.num_orig_insts[15:0]
 pipe.num_dup_insts[15:0]
-[color] 1
-instruction[31:0]
-pipe.qed_ifu_instruction[31:0]
-@28
-pipe.qed_ready[0]
-@23
 [color] 7
 pipe.aregfile.regfile.mem[1][31:0]
-@22
 [color] 7
 pipe.aregfile.regfile.mem[17][31:0]
+@28
+[color] 1
+pipe.dec1.inst[31:0]
+pipe.dec1.opcode[6:0]
+@22
+pipe.dec1.rd[4:0]
+pipe.dec1.rs1[4:0]
+pipe.dec1.rs2[4:0]
+@25
+pipe.dec1.funct12[11:0]
 [pattern_trace] 1
 [pattern_trace] 0
