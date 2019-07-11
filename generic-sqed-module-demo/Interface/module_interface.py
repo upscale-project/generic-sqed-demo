@@ -1,4 +1,10 @@
-
+# Copyright (c) Stanford University
+#
+# This source code is patent protected and being made available under the
+# terms explained in the ../LICENSE-Academic and ../LICENSE-GOV files.
+#
+# Author: Mario Srouji
+# Email : msrouji@cs.stanford.edu
 
 def module_def(module, name, arg_names, arg_signals, num_spaces=2):
     module_definition = " "*num_spaces

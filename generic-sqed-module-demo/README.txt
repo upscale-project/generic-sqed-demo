@@ -1,3 +1,6 @@
+Author: Mario Srouji
+Email: msrouji@cs.stanford.edu
+
 This directory will contain the generic SQED module, and the common
 submodules that are shared across all the different QED
 implementations.

@@ -1,3 +1,6 @@
+# Author: Mario Srouji
+# Email : msrouji@cs.stanford.edu
+
 # You can use python style comments with (#)
 # to add notes, or comment out lines.
 
