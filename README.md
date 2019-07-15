@@ -4,7 +4,7 @@ This demo is a re-implementation of a [previous related
 demo](https://github.com/makaimann/ride-core-demo) that shows how a
 bug in the [RIDECORE](https://github.com/ridecore/ridecore) RISC-V
 processor core is discovered using symbolic quick error detection
-(QED).
+(SQED).
 
 In contrast to the previous one, this demo is based on a _generic QED
 module_. Given a specification of the ISA and the design in a
@@ -12,10 +12,13 @@ particular format, we generate the Verilog sources of a QED module
 that is integrated in the RIDECORE design for testing purposes.
 
 # License
-This demo consists of multiple components each of which come with their own license. Please view the license files in the sub-directories. For convenience, they have been linked here: 
+This demo consists of multiple components each of which comes with its own license. Please view the license files in the sub-directories. For convenience, they have been linked here: 
 * Model checker and its configuration files -- ./cosa-problem-files/: [BSD LICENSE](./cosa-problem-files/LICENSE)
 * RIDECORE source files -- ./ridecore-src-buggy/: [Tokyo Institute of Technology and Regents of the University of California LICENSE](./ridecore-src-buggy/LICENSE)
-* QED module -- ./generic-sqed-module-demo/: [Academic](./generic-sqed-module-demo/LICENSE-Academic) and [Government Use Only](./generic-sqed-module-demo/LICENSE-GOV)
+* QED module -- ./generic-sqed-module-demo/:
+[Academic](./generic-sqed-module-demo/LICENSE-Academic) and
+[Government](./generic-sqed-module-demo/LICENSE-GOV) use only.  SQED is patent
+protected and may not be used for commercial purposes or any other purposes outside the conditions of these two licenses.
 
 # Dependencies
 

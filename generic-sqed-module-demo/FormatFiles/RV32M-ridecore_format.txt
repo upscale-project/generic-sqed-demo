@@ -1,3 +1,7 @@
+# Copyright (c) Stanford University
+#
+# This is an example format file for use with the generic symbolic QED generator.
+#
 # Author: Mario Srouji
 # Email : msrouji@cs.stanford.edu
 
