@@ -11,6 +11,10 @@ module_. Given a specification of the ISA and the design in a
 particular format, we generate the Verilog sources of a QED module
 that is integrated in the RIDECORE design for testing purposes.
 
+# Demo Video
+
+Our workflow is illustrated in the following [demo video](http://upscale.stanford.edu/materials/eri-summit-2019-sqed-demo-video.mp4) prepared for the [ERI Summit 2019](http://www.eri-summit.com/).
+
 # License
 This demo consists of multiple components each of which comes with its own license. Please view the license files in the sub-directories. For convenience, they have been linked here: 
 * Model checker and its configuration files -- ./cosa-problem-files/: [BSD LICENSE](./cosa-problem-files/LICENSE)
