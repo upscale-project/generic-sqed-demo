@@ -1,0 +1,55 @@
+STANFORD GOVERNMENT PURPOSE RIGHTS SOFTWARE LICENSE AGREEMENT FOR
+Stanford Docket S15-110 “Symbolic Quick Error Detection (SQED)”
+
+1. This is a legal agreement between (“RECIPIENT” or “you”), and THE BOARD OF
+TRUSTEES OF THE LELAND STANFORD JUNIOR UNIVERSITY (“STANFORD”). By accepting,
+receiving, and using “SQED,” including any accompanying information, materials
+or manuals (“Program”), you are agreeing to be bound by the terms of this
+Agreement. If you do not agree to the terms of this Agreement, promptly return
+the Program to STANFORD.
+2. STANFORD grants to RECIPIENT a royalty-free, nonexclusive, and
+nontransferable license to use the Program furnished hereunder, upon the
+terms and conditions set out below.
+3. RECIPIENT acknowledges that the Program is a research tool still in the
+development stage and that it is being supplied as is, without any
+accompanying services, support or improvements from STANFORD.
+STANFORD MAKES NO REPRESENTATIONS AND EXTENDS NO WARRANTIES OF ANY KIND,
+EITHER EXPRESS OR IMPLIED OTHER THAN SET OUT IN THIS AGREEMENT.
+4. STANFORD does not grant any licenses under any Stanford patent or patent
+application by this Agreement. Specifically, no license is granted to Stanford’s
+PCT Patent Application Serial Number PCT/US2016/035987 which is related to
+the SQED software.
+5. STANFORD grants RECIPIENT a Government Purpose Rights license, as
+defined by DFARS 252.227-7014. This license provides RECIPIENT with the
+rights to:
+i. Use, modify, reproduce, release, perform, display, or disclose the
+Program or computer software documentation within the Government
+without restriction; and
+ii. Release or disclose the Program or computer software documentation
+outside the Government and authorize persons to whom release or
+disclosure has been made to use, modify, reproduce, release, perform,
+display, or disclose the software or documentation for United States
+government purposes.
+6. RECIPIENT agrees to use the Program solely for Government Purposes as
+defined by DFARS 252.227-7014. This license does not grant Unlimited Rights
+as defined by DFARS 252.227-7014.
+7. RECIPIENT acknowledges that any programs created based on the Program
+will be considered a derivative of Program and owned by STANFORD.
+8. RECIPIENT warrants that RECIPIENT will not remove or export any part of the
+software or Program from the United States except in full compliance with all
+United States and other applicable laws and regulations.
+9. RECIPIENT will use the Program in compliance with all applicable laws,
+policies and regulations including, but not limited to, any approvals, informed
+consent and patient confidentiality principles.
+10. Title and copyright to the Program and any derivatives and any associated
+documentation shall at all times remain with STANFORD, and RECIPIENT
+agrees to preserve same.
+11. The parties to this document agree that a copy of the original signature
+(including an electronic copy) may be used for any and all purposes for which
+the original signature may have been used. The parties further waive any right
+to challenge the admissibility or authenticity of this document in a court of law
+based solely on the absence of an original signature.
+12. The Program contains code for data collection purposes including but not
+limited to tracking and license purposes. RECIPIENT agrees that removal
+or otherwise disabling these functions constitutes a direct violation of this
+license.

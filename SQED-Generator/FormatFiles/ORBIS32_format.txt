@@ -1,0 +1,303 @@
+# You can use python style comments with (#)
+# to add notes, or comment out lines.
+
+# Copyright (c) Stanford University
+# 
+# This source code is patent protected and being made available under the
+# terms explained in the ../LICENSE-Academic and ../LICENSE-GOV files.
+
+# Author: Mario J Srouji
+# Email: msrouji@stanford.edu
+
+SECTIONS = ISA QEDCONSTRAINTS REGISTERS MEMORY BITFIELDS INSTYPES INSFIELDS INSREQS R I LW SW NOP
+
+_ISA
+num_registers = 32
+instruction_length = 32
+
+_QEDCONSTRAINTS
+half_registers = 1
+half_memory = 1
+
+_REGISTERS
+rD
+rA
+rB
+
+# Defines the memory fields to be modified in the 
+# modify file 
+_MEMORY
+imm12
+imm7
+
+_BITFIELDS
+rD = 25 21
+rA = 20 16
+rB = 15 11
+opcode2 = 9 8
+opcode4 = 3 0
+opcode6 = 31 26
+simm16 = 15 0
+
+opcode4EXT = 9 6
+opcodeFP = 7 0
+
+_INSTYPES
+CONSTRAINT MEMORYTYPE: LW SW
+
+R
+I
+LW
+SW
+NOP
+
+_INSFIELDS
+R = funct7 rs2 rs1 funct3 rd opcode
+I = imm12 rs1 funct3 rd opcode
+LW = imm12 rs1 funct3 rd opcode
+SW = imm7 rs2 rs1 funct3 imm5 opcode
+NOP = imm12 rs1 funct3 rd opcode
+
+_INSREQS
+R
+opcode6 = 111000
+
+I
+opcode6 = 100111
+opcode6 = 101001
+opcode6 = 101100
+opcode6 = 101010
+opcode6 = 101011
+opcode6 = 101110
+
+LW
+CONSTRAINT (instruction[15:14] == 2'b00)
+opcode6 = 100100
+opcode6 = 100011
+opcode6 = 100110
+opcode6 = 100101
+opcode6 = 100010
+opcode6 = 100001
+
+SW
+opcode6 = 110110
+opcode6 = 110111
+opcode6 = 110101
+
+_R
+ADD
+opcode6 = 111000
+opcode2 = 00
+opcode4 = 0000
+
+AND
+opcode6 = 111000
+opcode2 = 00
+opcode4 = 0011
+
+DIV
+opcode6 = 111000
+opcode2 = 11
+opcode4 = 1001
+
+DIVU
+opcode6 = 111000
+opcode2 = 11
+opcode4 = 1010
+
+FF1
+opcode6 = 111000
+opcode2 = 00
+opcode4 = 1111
+
+FL1
+opcode6 = 111000
+opcode2 = 01
+opcode4 = 1111
+
+MUL
+opcode6 = 111000
+opcode2 = 11
+opcode4 = 0110
+
+MULU
+opcode6 = 111000
+opcode2 = 11
+opcode4 = 1011
+
+OR
+opcode6 = 111000
+opcode2 = 00
+opcode4 = 0100
+
+ROR
+opcode6 = 111000
+opcode2 = 11
+opcode4 = 1000
+
+SUB
+opcode6 = 111000
+opcode2 = 00
+opcode4 = 0101
+
+XOR
+opcode6 = 111000
+opcode2 = 00
+opcode4 = 0101
+
+SLL
+opcode6 = 111000
+opcode4EXT = 0000
+opcode4 = 1000
+
+SRA
+opcode6 = 111000
+opcode4EXT = 0010
+opcode4 = 1000
+
+SRL
+opcode6 = 111000
+opcode4EXT = 0001
+opcode4 = 1000
+
+EXTBS
+opcode6 = 111000
+opcode4EXT = 0001
+opcode4 = 1100
+
+EXTBZ
+opcode6 = 111000
+opcode4EXT = 0011
+opcode4 = 1100
+
+EXTHS
+opcode6 = 111000
+opcode4EXT = 0000
+opcode4 = 1100
+
+EXTHZ
+opcode6 = 111000
+opcode4EXT = 0010
+opcode4 = 1100
+
+EXTWS
+opcode6 = 111000
+opcode4EXT = 0000
+opcode4 = 1101
+
+EXTWZ
+opcode6 = 111000
+opcode4EXT = 0001
+opcode4 = 1101
+
+_I
+ADDI
+opcode6 = 100111
+
+ANDI
+opcode6 = 101001
+
+MULI
+opcode6 = 101100
+
+ORI
+opcode6 = 101010
+
+XORI
+opcode6 = 101011
+
+SLLI
+CONSTRAINT (instruction[7:6] == 2'b00)
+opcode6 = 101110
+
+SRAI
+CONSTRAINT (instruction[7:6] == 2'b10)
+opcode6 = 101110
+
+SRLI
+CONSTRAINT (instruction[7:6] == 2'b01)
+opcode6 = 101110
+
+_LW
+LBS
+CONSTRAINT (instruction[15:14] == 2'b00)
+opcode6 = 100100
+rA = 00000
+
+LBZ
+CONSTRAINT (instruction[15:14] == 2'b00)
+opcode6 = 100011
+rA = 00000
+
+LHS
+CONSTRAINT (instruction[15:14] == 2'b00)
+opcode6 = 100110
+rA = 00000
+
+LHZ
+CONSTRAINT (instruction[15:14] == 2'b00)
+opcode6 = 100101
+rA = 00000
+
+LWS
+CONSTRAINT (instruction[15:14] == 2'b00)
+opcode6 = 100010
+rA = 00000
+
+LWZ
+CONSTRAINT (instruction[15:14] == 2'b00)
+opcode6 = 100001
+rA = 00000
+
+_SW
+SB
+CONSTRAINT (instruction[25:24] == 2'b00)
+CONSTRAINT (rB < 16)
+opcode6 = 110110
+rA = 00000
+
+SH
+CONSTRAINT (instruction[25:24] == 2'b00)
+CONSTRAINT (rB < 16)
+opcode6 = 110111
+rA = 00000
+
+SW
+CONSTRAINT (instruction[25:24] == 2'b00)
+CONSTRAINT (rB < 16)
+opcode6 = 110101
+rA = 00000
+
+_FP
+CONSTRAINT (opcode6 == 6'b110010)
+
+FADD
+opcodeFP = 00000000
+
+FDIV
+opcodeFP = 00000011
+
+FTOI
+opcodeFP = 00000101
+rB = 00000
+
+ITOF
+opcodeFP = 00000100
+rB = 00000
+
+FMUL
+opcodeFP = 00000010
+
+FREM
+opcodeFP = 00000110
+
+FSUB
+opcodeFP = 00000001
+
+_NOP
+NOP
+CONSTRAINT (instruction == {8'b00010101, 24'd0})
+
+
+
+

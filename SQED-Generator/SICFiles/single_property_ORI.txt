@@ -1,0 +1,17 @@
+[GENERAL]
+default_initial_value: 0
+vcd: True
+abstract_clock: True
+no_arrays: False
+model_files: ridecore.vlist[top],init.ssts,nop_m.ssts,state_copy.ssts 
+
+[DEFAULT]
+solver_name: btor
+prove: False
+
+[CHECK for ORI]
+bmc_length: 8
+description: "Check for Single Instruction"
+verification: safety
+assumptions: (reset_x = 1_1);(state_counter = 0_10) -> (inst_constraint0.ORI = 1_1);(state_counter = 1_10) -> ((inst_constraint0.ORI = 1_1) & (rd != 0_5));
+properties: (state_counter = 7_10) -> ((val1 | imm_copy) = pipe.aregfile.regfile.mem[rd_copy])
