@@ -2,10 +2,7 @@
 
 cd ./SQED-Generator/Generators/
 
-python constraint_generator.py
-python decoder_generator.py
-python modify_generator.py
-python qed_generator.py
+python ./generate_sqed.py ../FormatFiles/RV32M-ridecore_format.txt
 
 cd ..
 
