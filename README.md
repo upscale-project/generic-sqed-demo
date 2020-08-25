@@ -35,6 +35,12 @@ General installation instructions can be found in the
 [README](https://github.com/makaimann/ride-core-demo/blob/master/install/README.md)
 of the [related demo](https://github.com/makaimann/ride-core-demo).
 
+**Please note**: the version of the SQED generator used in this demo requires Python 2.7.
+
+The latest version of the SQED generator, which also supports Python3,
+is available here:
+[https://github.com/upscale-project/sqed-generator](https://github.com/upscale-project/sqed-generator)
+
 # Symbolic Quick Error Detection (QED)
 
 This description has been taken from the [related demo](https://github.com/makaimann/ride-core-demo).
