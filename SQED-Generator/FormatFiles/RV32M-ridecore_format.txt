@@ -113,7 +113,8 @@ CONSTRAINT NOPTYPE,NOP
 
 R
 I
-LW
+# Don't allow load word -- not needed for this demo
+# LW
 SW
 NOP
 
