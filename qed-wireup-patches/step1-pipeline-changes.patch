@@ -1,0 +1,37 @@
+--- ./ridecore-src-buggy/pipeline.v	2020-09-14 16:31:19.047685778 -0700
++++ ./pipeline.v	2020-09-14 16:30:52.937524433 -0700
+@@ -859,6 +859,8 @@
+ 			      .comptr(comptr),
+ 			      .nextrrfcyc(nextrrfcyc)
+ 			      );
++   wire [`DATA_LEN-1:0] mem1;
++   wire [`DATA_LEN-1:0] mem17;
+ 
+    arf aregfile(
+ 		.clk(clk),
+@@ -904,7 +906,9 @@
+ 			     (isbranch1_id ? ~sptag1_id : ~(`SPECTAG_LEN'b0)) &
+ 			     (isbranch2_id ? ~sptag2_id : ~(`SPECTAG_LEN'b0))),
+ 		.mpft_valid2(mpft_valid & 
+-			     (isbranch2_id ? ~sptag2_id : ~(`SPECTAG_LEN'b0)))
++			     (isbranch2_id ? ~sptag2_id : ~(`SPECTAG_LEN'b0))),
++		.mem1(mem1),
++		.mem17(mem17)
+ 		);
+    
+    assign	rrftagfix = buf_rrftag_branch + 1;
+@@ -1994,6 +1998,14 @@
+      end
+ 
+    assign qed_ready = (num_orig_insts == num_dup_insts);
++   
++   always @(posedge clk)
++     begin
++	if (qed_ready) begin
++	   sqed: assert property (mem1 == mem17);
++	end
++     end
++
+ 
+    // EDIT END
+ 
