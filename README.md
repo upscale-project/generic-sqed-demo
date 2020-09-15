@@ -165,4 +165,4 @@ To demonstrate the application of the generic QED module, we run the following s
 - Fix the bug by running `fix-ridecore-bug.sh`.
 
 - Running Pono again will not find any bug within the bounds of the
-  chosen unrolling depths (k=12).
+  chosen unrolling depth (k=12).
