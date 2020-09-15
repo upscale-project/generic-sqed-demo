@@ -2,9 +2,28 @@
 
 # generate the btor
 echo "Generating BTOR2 using yosys"
-./yosys/yosys -q -s gen-btor.ys
+# prefer local version
+if [ -f ./yosys/yosys ]; then
+    YOSYS=./yosys/yosys
+elif [ `which yosys` ]; then
+    YOSYS=yosys
+else
+    echo "Could not find Yosys. Needed to generate BTOR2"
+    exit 1
+fi
+
+$YOSYS -q -s gen-btor.ys
 
 # run pono
 echo ""
 echo "Running pono"
-./pono/build/pono -v 1 -k 12 ./ridecore.btor2
+# prefer local version
+if [ -f ./pono/build/pono ]; then
+    PONO=./pono/build/pono
+elif [ `which pono` ]; then
+    PONO=pono
+else
+    echo "Could not find Pono."
+    exit 1
+fi
+$PONO -v 1 -k 12 ./ridecore.btor2
