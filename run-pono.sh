@@ -26,4 +26,4 @@ else
     echo "Could not find Pono."
     exit 1
 fi
-$PONO -v 1 -k 12 ./ridecore.btor2
+$PONO -v 1 -k 12 --vcd ridecore-trace.vcd ./ridecore.btor2
