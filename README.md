@@ -13,7 +13,7 @@ that is integrated in the RIDECORE design for testing purposes.
 
 # Demo Video
 
-Our workflow is illustrated in the following [demo video](http://upscale.stanford.edu/materials/eri-summit-2019-sqed-demo-video.mp4) prepared for the [ERI Summit 2019](http://www.eri-summit.com/).
+Our workflow is illustrated in the following [demo video](http://upscale.stanford.edu/materials/eri-summit-2019-sqed-demo-video.mp4) prepared for the [ERI Summit 2019](http://www.eri-summit.com/). The demo shows the same general workflow but runs the model checker [CoSA](https://github.com/cristian-mattarei/CoSA) instead of the newer version [Pono](https://github.com/upscale-project/pono).
 
 # License
 This demo consists of multiple components each of which comes with its own license. Please view the license files in the sub-directories. For convenience, they have been linked here:
@@ -62,35 +62,6 @@ For a much more in depth introduction, see this [paper](https://arxiv.org/pdf/17
   still has the bug in the multiply decoder bug. The bug was fixed officially in [commit 200c6a663e01cb2231004bb2543e7ce8b1c92cca](https://github.com/ridecore/ridecore/commit/200c6a663e01cb2231004bb2543e7ce8b1c92cca). This demo shows how
   to detect that bug using the generic QED module generated from an
   ISA specification file.
-
-- cosa-problem-files: CoSA problem files for running
-  symbolic QED on the RIDECORE design.
-
-  - problem.txt: basic set up for the model checking run using
-    CoSA. This configuration uses a reset procedure (see file
-    reset_procedure.ets) to start the instruction sequence in a reset
-    state. Running the reset procedure followed by the instruction
-    sequence to detect the bug requires to unroll the design for a
-    total number of 13 steps.
-
-  - problem-use-init-state.txt: same as problem.txt but uses a
-    predefined reset state (see file init.ssts), which allows to avoid running the reset
-    procedure. Consequently, it is sufficient to unroll the design
-    only for 10 steps to detect the bug.
-
-  - property.txt: the actual QED property being checked (pairs of
-    mapped original and duplicate registers must contain the same
-    value).
-
-  - init.ssts: a given initial state (reset state) where the
-    instruction sequence starts. Variables not listed have a default
-    value of 0.
-
-  - reset_procedure.ets: procedure to bring the RIDECORE model in a
-    reset state where the instruction sequence starts.
-
-  - ridecore.vlist: list of Verilog source files to construct a
-    symbolic model of the RIDECORE design.
 
 - generic-sqed-module-demo: contains a workflow to generate the
   Verilog sources of a QED module for RIDECORE. The workflow is
