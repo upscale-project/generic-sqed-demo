@@ -9,8 +9,7 @@
 # Author: Mario J Srouji
 # Email: msrouji@stanford.edu
 
-# Don't allow LW (load word) -- not needed for this demo
-SECTIONS = SIC ISA QEDCONSTRAINTS REGISTERS MEMORY BITFIELDS INSTYPES INSFIELDS INSREQS R I SW NOP
+SECTIONS = SIC ISA QEDCONSTRAINTS REGISTERS MEMORY BITFIELDS INSTYPES INSFIELDS INSREQS R I LW SW NOP
 
 _SIC
 MODULENAME
@@ -39,7 +38,7 @@ val1 = 5
 val2 = 5
 
 DELAY
-# LW = 1
+LW = 1
 SW = 2
 
 GENERAL
@@ -62,8 +61,7 @@ verification = safety
 bmc_length = 8
 
 ASSUMPTIONS
-# CONSTRAINT R,I,LW,SW,(rd != 0_5)
-CONSTRAINT R,I,SW,(rd != 0_5)
+CONSTRAINT R,I,LW,SW,(rd != 0_5)
 
 #PROPERTIES
 
@@ -108,24 +106,21 @@ imm5 = 11 7
 # the modify file to define the memory
 # instructions 
 _INSTYPES
-# CONSTRAINT MEMORYTYPE,LW,SW
-# Don't allow load word -- not needed for this demo
-CONSTRAINT MEMORYTYPE,SW
+CONSTRAINT MEMORYTYPE,LW,SW
 CONSTRAINT IMMEDIATETYPE,I
 CONSTRAINT REGISTERTYPE,R
 CONSTRAINT NOPTYPE,NOP
 
 R
 I
-# Don't allow load word -- not needed for this demo
-# LW
+LW
 SW
 NOP
 
 _INSFIELDS
 R = funct7 rs2 rs1 funct3 rd opcode
 I = imm12 rs1 funct3 rd opcode
-# LW = imm12 rs1 funct3 rd opcode
+LW = imm12 rs1 funct3 rd opcode
 SW = imm7 rs2 rs1 funct3 imm5 opcode
 NOP = imm12 rs1 funct3 rd opcode
 
@@ -142,9 +137,9 @@ opcode = 0110011
 I
 opcode = 0010011
 
-# LW
-# opcode = 0000011
-# funct3 = 010
+LW
+opcode = 0000011
+funct3 = 010
 
 SW
 opcode = 0100011
@@ -270,13 +265,13 @@ funct3 = 101
 funct7 = 0100000
 opcode = 0010011
 
-# _LW
-# CONSTRAINT (instruction[31:30] == 00)
+_LW
+CONSTRAINT (instruction[31:30] == 00)
 
-# LW
-# rs1 = 00000
-# opcode = 0000011
-# funct3 = 010
+LW
+rs1 = 00000
+opcode = 0000011
+funct3 = 010
 
 _SW
 CONSTRAINT (instruction[31:30] == 00)
