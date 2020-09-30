@@ -29,11 +29,23 @@ protected and may not be used for commercial purposes or any other purposes outs
 
 We assume that the [Yosys Open Synthesis
 Suite](https://github.com/YosysHQ/yosys), and the model checker
-[Pono](https://github.com/upscale-project/pono) are installed.
+[Pono](https://github.com/upscale-project/pono) are installed. For convenience,
+we have provided the setup scripts `setup-yosys.sh`, and `setup-pono.sh`.
+However, both assume their dependencies are installed. Please see the relevant
+repositories for that information. Alternatively, there is a Dockerfile in
+`docker` for running this demo in Docker.
 
-General installation instructions can be found in the
-[README](https://github.com/makaimann/ride-core-demo/blob/master/install/README.md)
-of the [related demo](https://github.com/makaimann/ride-core-demo).
+## Docker
+* [Docker installation](https://hub.docker.com/search/?type=edition&offering=community)
+* On linux, you will probably need to preface every docker command with `sudo`. Unless you take extra steps to avoid this.
+* To build the image, run `docker build -t <name of your choice> <path to the directory with Dockerfile>`
+  * For example, `docker build -t sqed ./docker`
+  * It will take a while to build the image with all the dependencies
+*  Now you can start the image with `docker run -it --rm -v ``pwd``/data:/home/sqed-demo/generic-sqed-demo/data <name of image>`
+  * For example, `docker run -it --rm -v ``pwd``/data:/home/sqed-demo/generic-sqed-demo/data sqed`
+* The `data` directory is for shared data, which can be accessed both from within the container and in the host
+  * This can be used to share a waveform and then view it on the host machine
+* We use [gtkwave](http://gtkwave.sourceforge.net/) for viewing waveforms
 
 # Symbolic Quick Error Detection (QED)
 
