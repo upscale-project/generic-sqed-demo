@@ -41,8 +41,8 @@ repositories for that information. Alternatively, there is a Dockerfile in
 * To build the image, run `docker build -t <name of your choice> <path to the directory with Dockerfile>`
   * For example, `docker build -t sqed ./docker`
   * It will take a while to build the image with all the dependencies
-*  Now you can start the image with `docker run -it --rm -v ``pwd``/data:/home/sqed-demo/generic-sqed-demo/data <name of image>`
-  * For example, `docker run -it --rm -v ``pwd``/data:/home/sqed-demo/generic-sqed-demo/data sqed`
+*  Now you can start the image with ``docker run -it --rm -v `pwd`/data:/home/sqed-demo/generic-sqed-demo/data <name of image>``
+  * For example, ``docker run -it --rm -v `pwd`/data:/home/sqed-demo/generic-sqed-demo/data sqed``
 * The `data` directory is for shared data, which can be accessed both from within the container and in the host
   * This can be used to share a waveform and then view it on the host machine
 * We use [gtkwave](http://gtkwave.sourceforge.net/) for viewing waveforms
