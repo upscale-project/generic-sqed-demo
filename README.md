@@ -27,10 +27,9 @@ protected and may not be used for commercial purposes or any other purposes outs
 
 # Dependencies
 
-We assume that the [Yosys Open Synthesis Suite](https://github.com/YosysHQ/yosys), the model checker
-[CoSA](https://github.com/cristian-mattarei/CoSA) and the SMT solver
-[Boolector](https://github.com/Boolector/boolector) including its
-Python bindings are installed.
+We assume that the [Yosys Open Synthesis
+Suite](https://github.com/YosysHQ/yosys), and the model checker
+[Pono](https://github.com/upscale-project/pono) are installed.
 
 General installation instructions can be found in the
 [README](https://github.com/makaimann/ride-core-demo/blob/master/install/README.md)
