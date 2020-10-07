@@ -1,0 +1,23 @@
+--- ./ridecore-src-buggy/ram_sync_nolatch.v	2020-09-14 16:15:59.534217925 -0700
++++ ./ram_sync_nolatch.v	2020-09-14 16:15:55.397555066 -0700
+@@ -128,7 +128,9 @@
+     input wire [BRAM_DATA_WIDTH-1:0]  wdata1,
+     input wire [BRAM_DATA_WIDTH-1:0]  wdata2,
+     input wire 			      we1,
+-    input wire 			      we2
++    input wire 			      we2,
++    output wire [BRAM_DATA_WIDTH-1:0] mem1,
++    output wire [BRAM_DATA_WIDTH-1:0] mem17
+     );
+ 
+    reg [BRAM_DATA_WIDTH-1:0] 				       mem [0:DATA_DEPTH-1];
+@@ -144,6 +146,9 @@
+       if (we2)
+ 	mem[waddr2] <= wdata2;
+    end
++
++   assign mem1 = mem[1];
++   assign mem17 = mem[17];
+ endmodule // ram_sync_nolatch_4r2w
+ 
+ /*

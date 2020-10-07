@@ -1,0 +1,19 @@
+--- ./ridecore-src-buggy/topsim.v	2020-09-14 16:16:24.962164339 -0700
++++ ./topsim.v	2020-09-14 16:15:32.497772534 -0700
+@@ -15,6 +15,16 @@
+    input reset_x
+    );
+ 
++   // embed the assumption that there's no reset
++   // into the generated BTOR2
++   // we will run the reset sequence in Yosys before generating the BTOR2
++   // it will complain about the violated assumption, but should work
++   // fine otherwise
++   // this is a neg-edge reset, so we assume it is 1.
++   always @* begin
++      no_reset: assume(reset_x);
++   end
++
+    //Active Low SW
+ //   wire 	    clk;
+ //   wire 	    reset_x;

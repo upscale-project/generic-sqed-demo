@@ -1,0 +1,24 @@
+--- ./ridecore-src-buggy/arf.v	2020-09-14 16:15:59.522216010 -0700
++++ ./arf.v	2020-09-14 16:15:45.283908584 -0700
+@@ -40,7 +40,9 @@
+    input wire 			 prsuccess,
+    input wire [`SPECTAG_LEN-1:0] prtag,
+    input wire [`SPECTAG_LEN-1:0] mpft_valid1,
+-   input wire [`SPECTAG_LEN-1:0] mpft_valid2
++   input wire [`SPECTAG_LEN-1:0] mpft_valid2,
++   output wire [`DATA_LEN-1:0] mem1,
++   output wire [`DATA_LEN-1:0] mem17
+    );
+ 
+    // Set priority on instruction2 WriteBack
+@@ -80,7 +82,9 @@
+ 	   .wdata2(wdata2),
+ 	   //	   .we1(we1_prior2),
+ 	   .we1(we1_0reg),
+-	   .we2(we2_0reg)
++	   .we2(we2_0reg),
++	   .mem1(mem1),
++	   .mem17(mem17)
+ 	   );
+ 
+    

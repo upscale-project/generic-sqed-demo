@@ -1,0 +1,17 @@
+--- ./pipeline.v	2020-09-14 16:30:52.937524433 -0700
++++ ./ridecore-src-buggy/pipeline.v	2020-09-14 16:33:46.616923174 -0700
+@@ -557,10 +557,12 @@
+ 	 // EDIT: send the output of the QED module through the pipeline.
+ 	 //inst1_if <= inst1;
+ 	 inst1_if <= qed_ifu_instruction;
+-	 inst2_if <= inst2;
++	 //inst2_if <= inst2;
++	 inst2_if <= 32'd0;
+ 	 //inv1_if <= 0;
+ 	 inv1_if <= ~qed_vld_out;   // change to vld_out of qed0
+-	 inv2_if <= invalid2_pipe;
++	 //inv2_if <= invalid2_pipe;
++	 inv2_if <= 1'b1;
+ 	 // EDIT END
+ 	 bhr_if <= bhr;
+ 	 

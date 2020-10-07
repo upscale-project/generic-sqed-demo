@@ -1,0 +1,85 @@
+read_verilog -formal ./ridecore-src-buggy/define.v \
+./ridecore-src-buggy/topsim.v \
+./ridecore-src-buggy/alloc_issue_ino.v \
+./ridecore-src-buggy/search_be.v \
+./ridecore-src-buggy/srcsel.v  \
+./ridecore-src-buggy/alu_ops.vh \
+./ridecore-src-buggy/arf.v \
+./ridecore-src-buggy/ram_sync.v \
+./ridecore-src-buggy/ram_sync_nolatch.v  \
+./ridecore-src-buggy/brimm_gen.v \
+./ridecore-src-buggy/constants.vh \
+./ridecore-src-buggy/decoder.v \
+./ridecore-src-buggy/dmem.v \
+./ridecore-src-buggy/exunit_alu.v \
+./ridecore-src-buggy/exunit_branch.v \
+./ridecore-src-buggy/exunit_ldst.v \
+./ridecore-src-buggy/exunit_mul.v \
+./ridecore-src-buggy/imem.v \
+./ridecore-src-buggy/imm_gen.v \
+./ridecore-src-buggy/pipeline_if.v \
+./ridecore-src-buggy/gshare.v \
+./ridecore-src-buggy/pipeline.v \
+./ridecore-src-buggy/oldest_finder.v \
+./ridecore-src-buggy/btb.v \
+./ridecore-src-buggy/prioenc.v \
+./ridecore-src-buggy/mpft.v \
+./ridecore-src-buggy/reorderbuf.v \
+./ridecore-src-buggy/rrf_freelistmanager.v \
+./ridecore-src-buggy/rrf.v \
+./ridecore-src-buggy/rs_alu.v \
+./ridecore-src-buggy/rs_branch.v \
+./ridecore-src-buggy/rs_ldst.v \
+./ridecore-src-buggy/rs_mul.v \
+./ridecore-src-buggy/rs_reqgen.v \
+./ridecore-src-buggy/rv32_opcodes.vh \
+./ridecore-src-buggy/src_manager.v \
+./ridecore-src-buggy/srcopr_manager.v \
+./ridecore-src-buggy/storebuf.v \
+./ridecore-src-buggy/tag_generator.v \
+./ridecore-src-buggy/dualport_ram.v \
+./ridecore-src-buggy/alu.v \
+./ridecore-src-buggy/multiplier.v \
+./SQED-Generator/QEDFiles/inst_constraints.v \
+./SQED-Generator/QEDFiles/modify_instruction.v \
+./SQED-Generator/QEDFiles/qed_decoder.v \
+./SQED-Generator/QEDFiles/qed_i_cache.v \
+./SQED-Generator/QEDFiles/qed_instruction_mux.v \
+./SQED-Generator/QEDFiles/qed.v;
+
+# prep does a conservative elaboration
+# of the top module provided
+prep -top top;
+
+# this command just does a sanity check
+# of the hierarchy
+hierarchy -check;
+
+# If an assumption is flopped, you might
+# see strange behavior at the last state
+# (because the clock hasn't toggled)
+# this command ensures that assumptions
+# hold at every state
+chformal -assume -early;
+
+# this processes memories
+# nomap means it will keep them as arrays
+memory;
+
+# flatten the design hierarchy
+flatten;
+
+# (optional) uncomment and set values to simulate reset signal
+# use -resetn for an active low pin
+# -n configures the number of cycles to simulate
+# -rstlen configures how long the reset is active (recommended to keep it active for the whole simulation)
+# -w tells it to write back the final state of the simulation as the initial state in the btor2 file
+# another useful option is -zinit which zero initializes any uninitialized state
+sim -clock clk -resetn reset_x -n 5 -rstlen 5 -zinit -w top
+
+# This turns all undriven signals into
+# inputs
+setundef -undriven -expose;
+
+# This writes to a file in BTOR2 format
+write_btor ridecore.btor2

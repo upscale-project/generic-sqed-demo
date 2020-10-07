@@ -13,11 +13,12 @@ that is integrated in the RIDECORE design for testing purposes.
 
 # Demo Video
 
-Our workflow is illustrated in the following [demo video](http://upscale.stanford.edu/materials/eri-summit-2019-sqed-demo-video.mp4) prepared for the [ERI Summit 2019](http://www.eri-summit.com/).
+Our workflow is illustrated in the following [demo video](http://upscale.stanford.edu/materials/eri-summit-2019-sqed-demo-video.mp4) prepared for the [ERI Summit 2019](http://www.eri-summit.com/). The demo shows the same general workflow but runs the model checker [CoSA](https://github.com/cristian-mattarei/CoSA) instead of the newer version [Pono](https://github.com/upscale-project/pono).
 
 # License
-This demo consists of multiple components each of which comes with its own license. Please view the license files in the sub-directories. For convenience, they have been linked here: 
-* Model checker and its configuration files -- ./cosa-problem-files/: [BSD LICENSE](./cosa-problem-files/LICENSE)
+This demo consists of multiple components each of which comes with its own license. Please view the license files in the sub-directories. For convenience, they have been linked here:
+* Yosys and scripts -- setup-yosys.sh, gen-btor.ys: [ISC LICENSE](https://github.com/YosysHQ/yosys/blob/master/COPYING)
+* Model checker and scripts -- setup-pono.sh, run-pono.sh: [BSD LICENSE](./BSD_LICENSE)
 * RIDECORE source files -- ./ridecore-src-buggy/: [Tokyo Institute of Technology and Regents of the University of California LICENSE](./ridecore-src-buggy/LICENSE)
 * QED module -- ./generic-sqed-module-demo/:
 [Academic](./generic-sqed-module-demo/LICENSE-Academic) and
@@ -26,14 +27,25 @@ protected and may not be used for commercial purposes or any other purposes outs
 
 # Dependencies
 
-We assume that the [Yosys Open Synthesis Suite](https://github.com/YosysHQ/yosys), the model checker
-[CoSA](https://github.com/cristian-mattarei/CoSA) and the SMT solver
-[Boolector](https://github.com/Boolector/boolector) including its
-Python bindings are installed.
+We assume that the [Yosys Open Synthesis
+Suite](https://github.com/YosysHQ/yosys), and the model checker
+[Pono](https://github.com/upscale-project/pono) are installed. For convenience,
+we have provided the setup scripts `setup-yosys.sh`, and `setup-pono.sh`.
+However, both assume their dependencies are installed. Please see the relevant
+repositories for that information. Alternatively, there is a Dockerfile in
+`docker` for running this demo in Docker.
 
-General installation instructions can be found in the
-[README](https://github.com/makaimann/ride-core-demo/blob/master/install/README.md)
-of the [related demo](https://github.com/makaimann/ride-core-demo).
+## Docker
+* [Docker installation](https://hub.docker.com/search/?type=edition&offering=community)
+* On linux, you will probably need to preface every docker command with `sudo`. Unless you take extra steps to avoid this.
+* To build the image, run `docker build -t <name of your choice> <path to the directory with Dockerfile>`
+  * For example, `docker build -t sqed ./docker`
+  * It will take a while to build the image with all the dependencies
+*  Now you can start the image with ``docker run -it --rm -v `pwd`/data:/home/sqed-demo/generic-sqed-demo/data <name of image>``
+  * For example, ``docker run -it --rm -v `pwd`/data:/home/sqed-demo/generic-sqed-demo/data sqed``
+* The `data` directory is for shared data, which can be accessed both from within the container and in the host
+  * This can be used to share a waveform and then view it on the host machine
+* We use [gtkwave](http://gtkwave.sourceforge.net/) for viewing waveforms
 
 **Please note**: the version of the SQED generator used in this demo requires Python 2.7.
 
@@ -46,17 +58,17 @@ is available here:
 This description has been taken from the [related demo](https://github.com/makaimann/ride-core-demo).
 
 Symbolic Quick Error Detection (SQED) is a technique for logic bug detection and localization.
-Quick Error Detection (QED) is an approach for identifying bugs (primarily in processors but it can also be used 
+Quick Error Detection (QED) is an approach for identifying bugs (primarily in processors but it can also be used
 for other components) which transforms a set of original tests into QED checks. This involves splitting
 the register file in half and using one half for the original instructions and the second half for a duplicated
-sequence of instructions. Both the original and duplicated sequences execute the same instructions in the same order, 
-but they are interleaved. After the original and duplicate instruction sequences complete, the two halves of the 
-register file should match. Empirically, this approach can reduce the length of bug traces by up to 6 orders of 
+sequence of instructions. Both the original and duplicated sequences execute the same instructions in the same order,
+but they are interleaved. After the original and duplicate instruction sequences complete, the two halves of the
+register file should match. Empirically, this approach can reduce the length of bug traces by up to 6 orders of
 magnitude when compared to traditional techniques.
 
-_Symbolic_ QED is based on the observation that a Bounded Model Checker can _symbolically_ explore all instruction 
-sequences (up to a bound). Notably, this gives us a way to verify a processor without writing tests, and without even 
-providing any handwritten properties, instead relying only on this symbolic QED check. 
+_Symbolic_ QED is based on the observation that a Bounded Model Checker can _symbolically_ explore all instruction
+sequences (up to a bound). Notably, this gives us a way to verify a processor without writing tests, and without even
+providing any handwritten properties, instead relying only on this symbolic QED check.
 For a much more in depth introduction, see this [paper](https://arxiv.org/pdf/1711.06541.pdf).
 
 # Directory Tree
@@ -67,35 +79,6 @@ For a much more in depth introduction, see this [paper](https://arxiv.org/pdf/17
   still has the bug in the multiply decoder bug. The bug was fixed officially in [commit 200c6a663e01cb2231004bb2543e7ce8b1c92cca](https://github.com/ridecore/ridecore/commit/200c6a663e01cb2231004bb2543e7ce8b1c92cca). This demo shows how
   to detect that bug using the generic QED module generated from an
   ISA specification file.
-
-- cosa-problem-files: CoSA problem files for running
-  symbolic QED on the RIDECORE design.
-  
-  - problem.txt: basic set up for the model checking run using
-    CoSA. This configuration uses a reset procedure (see file
-    reset_procedure.ets) to start the instruction sequence in a reset
-    state. Running the reset procedure followed by the instruction
-    sequence to detect the bug requires to unroll the design for a
-    total number of 13 steps.
-    
-  - problem-use-init-state.txt: same as problem.txt but uses a
-    predefined reset state (see file init.ssts), which allows to avoid running the reset
-    procedure. Consequently, it is sufficient to unroll the design
-    only for 10 steps to detect the bug.
-
-  - property.txt: the actual QED property being checked (pairs of
-    mapped original and duplicate registers must contain the same
-    value).
-    
-  - init.ssts: a given initial state (reset state) where the
-    instruction sequence starts. Variables not listed have a default
-    value of 0.
-    
-  - reset_procedure.ets: procedure to bring the RIDECORE model in a
-    reset state where the instruction sequence starts.
-    
-  - ridecore.vlist: list of Verilog source files to construct a
-    symbolic model of the RIDECORE design.
 
 - generic-sqed-module-demo: contains a workflow to generate the
   Verilog sources of a QED module for RIDECORE. The workflow is
@@ -149,11 +132,23 @@ To demonstrate the application of the generic QED module, we run the following s
     module that is part of the QED module to make sure that the model
     checker selects only instructions that are part of the ISA.
 
+    We also add the assumption that reset is not activated. We will
+    simulate the reset sequence in Yosys, and thus can assume for
+    model checking that the reset is not active.
+
   - We modify the `pipeline` module to drive the `instruction` signal
     from the respective top-level input and we instantiate the QED module
     to modify the instruction. Finally, we send the output instruction
     of the QED module through the pipeline instead of the instruction
     obtained in the instruction fetch stage.
+
+    We also add outputs in `arf`, and `ram_sync_nolatch`, so that
+    registers 1 and 17 are accessible in the `pipeline` where the
+    QED module is. These are used in the universal property, and
+    Yosys does not support referring to internal signals of modules.
+    Note: the full universal property, would need to check all pairs:
+    1 and 17, 2 and 18, 3 and 19, etc. For this demo, we only need
+    the two and leave the others out to minimize changes.
 
   - Additionally, we apply the following steps, which are optional but
     crucial to reduce the amount of time required for model checking.
@@ -169,18 +164,22 @@ To demonstrate the application of the generic QED module, we run the following s
       abstract the clock in model checking and reduce the number of
       necessary unrollings in BMC from 24 to 13.
 
-- Run `CoSA --problems ./cosa-problem-files/problem-use-init-state.txt -v 2`
-  to run model checking starting from a predefined reset state (will unroll to k=10) or
-  `CoSA --problems ./cosa-problem-files/problem.txt -v 2` to apply
-  a reset procedure instead of the predefined reset state (will unroll
-  to k=13). For convenience, a log file is provided in
-  `bug-trace-k10-cosa-log.txt`.
+- Setting up the environment. If you do not already have `Yosys` installed,
+  you can run `setup-yosys.sh` to build it locally. Please refer to the
+  [Yosys repository](https://github.com/YosysHQ/yosys) for any dependency
+  information. If you do not already have `Pono` installed, you may use
+  the `setup-pono.sh` script to build it locally. Please refer to the
+  [Pono repository](https://github.com/upscale-project/pono) for any
+  installation information if the build fails.
 
-- CoSA produces a bug trace in terms of a VCD file
-  `trace[1]-QED_0.vcd` that can be inspected, e.g., using GTKWave. For
-  convenience, a bug trace is provided in file `bug-trace-k10.vcd`.
+- Run `run-pono.sh` to use Yosys to generate a BTOR2 file, `ridecore.btor2`,
+  and then run bounded model checking with `Pono` to find the bug. It should
+  get to bound 10 very quickly, but take about 10m to find the bug at bound 11.
+  It will write a trace to `ridecore-trace.vcd`. Note, all of the constraints
+  and the assertion are embedded in the BTOR2 file. Thus, you can use any
+  model checker that reads BTOR2 to check this property.
 
 - Fix the bug by running `fix-ridecore-bug.sh`.
 
-- Running CoSA again will not find any bug within the bounds of the
-  chosen unrolling depths (k=10 or k=13).
+- Running Pono again will not find any bug within the bounds of the
+  chosen unrolling depth (k=12).
