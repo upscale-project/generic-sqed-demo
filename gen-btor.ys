@@ -40,12 +40,12 @@ read_verilog -formal ./ridecore-src-buggy/define.v \
 ./ridecore-src-buggy/dualport_ram.v \
 ./ridecore-src-buggy/alu.v \
 ./ridecore-src-buggy/multiplier.v \
-./SQED-Generator/QEDFiles/inst_constraints.v \
-./SQED-Generator/QEDFiles/modify_instruction.v \
-./SQED-Generator/QEDFiles/qed_decoder.v \
-./SQED-Generator/QEDFiles/qed_i_cache.v \
-./SQED-Generator/QEDFiles/qed_instruction_mux.v \
-./SQED-Generator/QEDFiles/qed.v;
+./sqed-generator/SQED-Generator/QEDFiles/inst_constraints.v \
+./sqed-generator/SQED-Generator/QEDFiles/modify_instruction.v \
+./sqed-generator/SQED-Generator/QEDFiles/qed_decoder.v \
+./sqed-generator/SQED-Generator/QEDFiles/qed_i_cache.v \
+./sqed-generator/SQED-Generator/QEDFiles/qed_instruction_mux.v \
+./sqed-generator/SQED-Generator/QEDFiles/qed.v;
 
 # prep does a conservative elaboration
 # of the top module provided
